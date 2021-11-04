@@ -1,15 +1,8 @@
-package com.example.vinyls
+package com.example.vinyls.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import androidx.lifecycle.ViewModelProvider
-import com.android.volley.Response
-import com.example.vinyls.broker.VolleyBroker
-import com.example.vinyls.viewmodels.AlbumViewModel
-import com.example.vinyls.viewmodels.AlbumsViewModel
-import org.json.JSONArray
-import org.json.JSONObject
+import com.example.vinyls.R
 
 class MainActivity : AppCompatActivity() {
     lateinit var volleyBroker:VolleyBroker
