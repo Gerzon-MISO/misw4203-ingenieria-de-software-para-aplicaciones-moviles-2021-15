@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Vinyls</string>
+    <string name="title_artists">Artistas</string>
+    <string name="title_collectors">Coleccionistas</string>
+    <string name="title_albums">Albumes</string>
+    <string name="songs_title">Canciones</string>
+    <string name="artists_title">Artistas</string>
 </resources>
