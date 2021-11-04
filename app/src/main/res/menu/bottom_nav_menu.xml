@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_albums"
         android:icon="@drawable/ic_albums"
         android:title="@string/title_albums" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_collectors"
         android:icon="@drawable/ic_collectors"
         android:title="@string/title_collectors" />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_artists"
         android:icon="@drawable/ic_artists"
         android:title="@string/title_artists" />
 

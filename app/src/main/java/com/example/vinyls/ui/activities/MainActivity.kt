@@ -3,30 +3,36 @@ package com.example.vinyls.ui.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.vinyls.R
+import com.example.vinyls.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+
 
 class MainActivity : AppCompatActivity() {
-    lateinit var volleyBroker:VolleyBroker
-    lateinit var button:Button
-    lateinit var button2:Button
-    lateinit var viewModel1:AlbumsViewModel
-    lateinit var viewModel2:AlbumViewModel
-    var  resp:JSONArray?=null
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        button = findViewById(R.id.button)
-        button2 = findViewById(R.id.button2)
-        viewModel1 = ViewModelProvider(this,AlbumsViewModel.Factory(this.application)).get(AlbumsViewModel::class.java)
-        viewModel2 = ViewModelProvider(this,AlbumViewModel.Factory(this.application,101)).get(AlbumViewModel::class.java)
+        val navView: BottomNavigationView = binding.navView
 
-        button.setOnClickListener{
-            viewModel1.albums.observe(this,{it.apply{ println(this)}})
-        }
-        button2.setOnClickListener{
-            viewModel2.album.observe(this,{it.apply { println(this) }})
-        }
+        val navController = findNavController(R.id.nav_host_fragment)
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_albums, R.id.navigation_collectors, R.id.navigation_artists
+            )
+        )
 
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
 
 }
 }
