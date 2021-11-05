@@ -29,7 +29,18 @@ class AlbumNwServiceAdapter constructor(context:Context) {
                 val list = mutableListOf<Album>()
                 for (i in 0 until resp.length()) {
                     val item = resp.getJSONObject(i)
-                    list.add(i, Album(albumId = item.getInt("id"),name = item.getString("name"), cover = item.getString("cover"), recordLabel = item.getString("recordLabel"), releaseDate = item.getString("releaseDate"), genre = item.getString("genre"), description = item.getString("description")))
+                    list.add(i, Album(
+                        albumId = item.getInt("id"),
+                        name = item.getString("name"),
+                        cover = item.getString("cover"),
+                        recordLabel = item.getString("recordLabel"),
+                        releaseDate = item.getString("releaseDate"),
+                        genre = item.getString("genre"),
+                        description = item.getString("description"),
+                        tracks = item.getJSONArray("tracks"),
+                        performers = item.getJSONArray("performers"),
+                        comments = item.getJSONArray("comments")
+                    ))
                 }
                 onComplete(list)
             },
@@ -42,7 +53,18 @@ class AlbumNwServiceAdapter constructor(context:Context) {
         requestQueue.add(volleyBroker.getRequest("albums/${albumId}",
             { response ->
                 val item = JSONObject(response)
-                val targetAlbum = Album(albumId = item.getInt("id"),name = item.getString("name"), cover = item.getString("cover"), recordLabel = item.getString("recordLabel"), releaseDate = item.getString("releaseDate"), genre = item.getString("genre"), description = item.getString("description"))
+                val targetAlbum = Album(
+                    albumId = item.getInt("id"),
+                    name = item.getString("name"),
+                    cover = item.getString("cover"),
+                    recordLabel = item.getString("recordLabel"),
+                    releaseDate = item.getString("releaseDate"),
+                    genre = item.getString("genre"),
+                    description = item.getString("description"),
+                    tracks = item.getJSONArray("tracks"),
+                    performers = item.getJSONArray("performers"),
+                    comments = item.getJSONArray("comments")
+                )
 
                 onComplete(targetAlbum)
             },
