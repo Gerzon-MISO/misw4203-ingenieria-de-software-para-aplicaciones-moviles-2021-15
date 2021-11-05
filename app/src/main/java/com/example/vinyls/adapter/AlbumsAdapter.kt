@@ -38,7 +38,7 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>(){
         holder.addImages(albums[position])
 
         holder.viewDataBinding.root.setOnClickListener {
-            println(position)
+            println(albums[position].albumId)
         }
     }
 
