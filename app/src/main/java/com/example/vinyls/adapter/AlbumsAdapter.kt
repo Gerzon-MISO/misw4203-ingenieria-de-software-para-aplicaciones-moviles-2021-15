@@ -8,8 +8,8 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinyls.R
 import com.example.vinyls.databinding.AlbumItemBinding
-import com.example.vinyls.helpers.DownloadImageTask
 import com.example.vinyls.models.Album
+import com.squareup.picasso.Picasso
 import java.io.IOException
 
 
@@ -33,9 +33,12 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>(){
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
         holder.viewDataBinding.also {
             it.album = albums[position]
+            Picasso.get()
+                .load(it.album?.cover)
+                .placeholder(R.drawable.noimg)
+                .error(R.drawable.noimg)
+                .into(it.imageView)
         }
-
-        holder.addImages(albums[position])
 
         holder.viewDataBinding.root.setOnClickListener {
             println(albums[position].albumId)
@@ -53,11 +56,6 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>(){
         companion object {
             @LayoutRes
             val LAYOUT = R.layout.album_item
-        }
-        @Throws(IOException::class)
-        fun addImages(album:Album){
-            var img:ImageView = viewDataBinding.imageView
-            DownloadImageTask(img as ImageView?).execute(album.cover)
         }
 
     }
