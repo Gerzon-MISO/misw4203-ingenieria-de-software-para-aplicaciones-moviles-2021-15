@@ -29,5 +29,5 @@
     <color name="secondaryLightColor">#629749</color>
     <color name="secondaryDarkColor">#003d00</color>
     <color name="primaryTextColor">#ffffff</color>
-    <color name="secondaryTextColor">#ffffff</color>
+    <color name="secondaryTextColor">#7D7D7D</color>
 </resources>
