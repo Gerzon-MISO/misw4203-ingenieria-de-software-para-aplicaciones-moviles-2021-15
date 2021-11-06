@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<!--
+    <data>
+        <variable name="songs" type="com.example.vinyls.models.Album"/>
+    </data>
+-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/songConstraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/itemNumberTextView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="1"
+            android:textSize="22sp"
+            android:textColor="@color/primaryTextColor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/NameSongTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Song name"
+            android:textSize="22sp"
+            android:textAlignment="textStart"
+            android:textColor="@color/primaryTextColor"
+            app:layout_constraintStart_toEndOf="@+id/itemNumberTextView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/viewMoreButton"/>
+
+        <TextView
+            android:id="@+id/durationTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="mm:ss"
+            android:layout_marginTop="10dp"
+            android:textSize="14sp"
+            android:textAlignment="textStart"
+            android:textColor="@color/secondaryTextColor"
+            app:layout_constraintStart_toEndOf="@+id/itemNumberTextView"
+            app:layout_constraintTop_toBottomOf="@+id/NameSongTextView"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <Button
+            android:id="@+id/viewMoreButton"
+            android:layout_width="20dp"
+            android:layout_height="40dp"
+            android:drawableEnd="@drawable/ic_more_vert"
+            android:textSize="50sp"
+            android:gravity="center"
+            android:backgroundTint="@color/primary_text"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
