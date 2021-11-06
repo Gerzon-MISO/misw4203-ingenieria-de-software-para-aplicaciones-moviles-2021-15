@@ -35,7 +35,7 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumsViewHolder>(){
         holder.viewDataBinding.also {
             it.albums = albums[position]
             Picasso.get()
-                .load(it.album?.cover)
+                .load(it.albums?.cover)
                 .placeholder(R.drawable.noimg)
                 .error(R.drawable.noimg)
                 .into(it.imageView)
