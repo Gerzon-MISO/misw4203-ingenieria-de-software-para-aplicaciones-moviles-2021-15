@@ -10,23 +10,39 @@
         android:name="com.example.vinyls.ui.fragments.AlbumsFragment"
         android:label="@string/title_albums"
         tools:layout="@layout/fragment_albums" >
+
+        <action
+            android:id="@+id/albumsFragmentToAlbumDetailFragmentAction"
+            app:destination="@+id/navigation_album_detail"/>
+
     </fragment>
 
     <fragment
         android:id="@+id/navigation_album_detail"
         android:name="com.example.vinyls.ui.fragments.AlbumDetailFragment"
         android:label="@string/title_albums"
-        tools:layout="@layout/fragment_album_detail" />
+        tools:layout="@layout/fragment_album_detail">
+
+        <argument
+            android:name="albumId"
+            app:argType="integer"/>
+
+        <action
+            android:id="albumDetailFragmentToAlbumsFragmentAction"
+            app:destination="@+id/navigation_albums"/>
+
+    </fragment>
+
     <fragment
         android:id="@+id/navigation_collectors"
         android:name="com.example.vinyls.ui.fragments.CollectorFragment"
         android:label="Coleccionistas"
         tools:layout="@layout/fragment_collector" />
+
     <fragment
         android:id="@+id/navigation_artists"
         android:name="com.example.vinyls.ui.fragments.ArtistFragment"
         android:label="Artistas"
         tools:layout="@layout/fragment_artist" />
-
 
 </navigation>
