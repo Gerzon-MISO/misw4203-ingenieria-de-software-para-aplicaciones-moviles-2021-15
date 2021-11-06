@@ -18,6 +18,9 @@
     <color name="background">#FF000000</color>
     <color name="yellow">#F7A41A</color>
     <color name="translucent_white">#E6FFFFFF</color>
+    <color name="gradient_start">#00ffffff</color>
+    <color name="gradient_end">#aa000000</color>
+    <color name="gradient_center">#00ffffff</color>
 
     <color name="primaryColor">#212121</color>
     <color name="primaryLightColor">#484848</color>

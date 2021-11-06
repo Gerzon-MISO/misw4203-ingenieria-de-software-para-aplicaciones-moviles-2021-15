@@ -1,16 +1,14 @@
 package com.example.vinyls.adapter
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinyls.R
 import com.example.vinyls.databinding.AlbumItemBinding
 import com.example.vinyls.models.Album
 import com.squareup.picasso.Picasso
-import java.io.IOException
 
 
 class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>(){
@@ -49,7 +47,6 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>(){
         return albums.size
     }
 
-
     class AlbumViewHolder(val viewDataBinding: AlbumItemBinding) :
 
         RecyclerView.ViewHolder(viewDataBinding.root) {
@@ -57,8 +54,5 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>(){
             @LayoutRes
             val LAYOUT = R.layout.album_item
         }
-
     }
-
-
 }
