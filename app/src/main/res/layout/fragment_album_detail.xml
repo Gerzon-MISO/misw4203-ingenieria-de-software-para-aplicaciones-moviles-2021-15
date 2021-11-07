@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/album_detail_artists_item" />
+            tools:listitem="@layout/album_artist_list_items" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
