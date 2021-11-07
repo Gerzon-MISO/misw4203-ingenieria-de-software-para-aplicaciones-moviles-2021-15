@@ -5,6 +5,7 @@ import com.android.volley.RequestQueue
 import com.android.volley.VolleyError
 import com.example.vinyls.broker.VolleyBroker
 import com.example.vinyls.models.Album
+import com.example.vinyls.models.Track
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -36,7 +37,7 @@ class AlbumNwServiceAdapter constructor(context:Context) {
                         releaseDate = item.getString("releaseDate"),
                         genre = item.getString("genre"),
                         description = item.getString("description"),
-                        tracks = item.getJSONArray("tracks"),
+                        tracks = this.getTracks(item.getJSONArray("tracks")),
                         performers = item.getJSONArray("performers"),
                         comments = item.getJSONArray("comments")
                     ))
@@ -60,7 +61,7 @@ class AlbumNwServiceAdapter constructor(context:Context) {
                     releaseDate = item.getString("releaseDate"),
                     genre = item.getString("genre"),
                     description = item.getString("description"),
-                    tracks = item.getJSONArray("tracks"),
+                    tracks = this.getTracks(item.getJSONArray("tracks")),
                     performers = item.getJSONArray("performers"),
                     comments = item.getJSONArray("comments")
                 )
@@ -70,5 +71,20 @@ class AlbumNwServiceAdapter constructor(context:Context) {
             {
                 onError(it)
             }))
+    }
+
+    private fun getTracks(jsonArray: JSONArray): List<Track> {
+        val trackList = mutableListOf<Track>()
+        for (i in 0 until jsonArray.length()) {
+            val item = jsonArray.getJSONObject(i)
+            trackList.add(
+                Track (
+                    trackId = item.getInt("id"),
+                    name = item.getString("name"),
+                    duration = item.getString("duration")
+                )
+            )
+        }
+        return trackList
     }
 }

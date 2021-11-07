@@ -11,7 +11,7 @@ data class Album (
     val description:String,
     val genre:String,
     val recordLabel:String,
-    val tracks:JSONArray,
+    val tracks: List<Track>,
     val performers:JSONArray,
     val comments:JSONArray
 )
