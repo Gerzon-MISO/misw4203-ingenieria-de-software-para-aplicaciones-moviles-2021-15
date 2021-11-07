@@ -5,6 +5,13 @@
     <string name="title_albums">Albumes</string>
     <string name="songs_title">Canciones</string>
     <string name="artists_title">Artistas</string>
+    <string name="desc_album_cover">Album cover</string>
+    <string name="desc_artist_cover">Artist cover</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="preg_usuario_inicio">Que tipo de usuario eres?</string>
+    <string name="inicio_button_visitante">Visitante</string>
+    <string name="inicio_button_usuario">Usuario</string>
+    <string name="agregar_cancion_album">Agregar canción</string>
+    <string name="agregar_album">Agregar Album</string>
 </resources>

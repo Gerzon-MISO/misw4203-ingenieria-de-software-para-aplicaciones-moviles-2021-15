@@ -11,7 +11,7 @@ data class Album (
     val description:String,
     val genre:String,
     val recordLabel:String,
-    val tracks:JSONArray,
+    val tracks: JSONArray,
     val performers:JSONArray,
     val comments:JSONArray
 )
@@ -33,6 +33,15 @@ data class Album (
 
         }
         return performer_string
+    }
+
+    fun getArtistCover(): String
+    {
+        if (performers.length() > 0)
+        {
+            return "${performers.getJSONObject(0)["image"]}"
+        }
+        return ""
     }
 }
 

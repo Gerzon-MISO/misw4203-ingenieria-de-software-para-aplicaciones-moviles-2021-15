@@ -1,56 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary">
+    tools:context=".ui.fragments.AlbumsFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="409dp"
-        android:layout_height="170dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/albumImageView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:src="@tools:sample/avatars"
-            android:contentDescription="TODO" />
-
-        <TextView
-            android:id="@+id/albumTitleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textSize="48sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:elevation="5dp"
-        android:padding="5dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="0dp">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/artistsConstraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="1dp">
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/albumRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/album_item" />
 
             <TextView
                 android:id="@+id/artistsTitleTextView"
@@ -58,58 +29,64 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/artists_title"
-                android:textColor="@color/primary_text"
+                android:textColor="@color/white"
                 android:textSize="22sp"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-            <ImageView
-                android:id="@+id/artistImageView"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_marginTop="10dp"
-                android:contentDescription="TODO"
-                tools:layout_editor_absoluteX="0dp"
-                tools:src="@tools:sample/avatars"
-                app:layout_constraintTop_toBottomOf="@+id/artistsTitleTextView"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/artistNameTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_bold"
-                android:text="Name artist"
-                android:textColor="@color/primary_text"
-                android:textSize="12sp"
-                app:layout_constraintTop_toBottomOf="@+id/artistImageView"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/albumRecyclerView"
                 tools:layout_editor_absoluteX="0dp" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginTop="5dp"
-            app:layout_constraintTop_toBottomOf="@+id/artistsConstraintLayout"
-            tools:layout_editor_absoluteX="21dp">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/album_artists_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/artistsTitleTextView"
+                tools:layout_editor_absoluteX="-16dp"
+                android:layout_marginLeft="10dp"
+                tools:listitem="@layout/album_artist_list_items" />
 
             <TextView
-                android:id="@+id/songsTitleTextView"
-                android:layout_width="wrap_content"
+                android:id="@+id/trackTitleTextView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/songs_title"
-                android:textColor="@color/primary_text"
+                android:textColor="@color/white"
                 android:textSize="22sp"
+                app:layout_constraintTop_toBottomOf="@+id/album_artists_rv"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                tools:layout_editor_absoluteX="0dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/album_tracks_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/trackTitleTextView"
+                tools:layout_editor_absoluteX="-16dp"
+                tools:listitem="@layout/album_track_list_items" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/agregar_cancion_but"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_styled"
+                android:radius="10dp"
+                android:stateListAnimator="@null"
+                android:text="@string/agregar_cancion_album"
+                android:layout_marginTop="20dp"
+                android:textColor="#424242"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/album_tracks_rv" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</FrameLayout>

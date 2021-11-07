@@ -3,7 +3,6 @@ package com.example.vinyls.network
 import android.content.Context
 import com.android.volley.RequestQueue
 import com.android.volley.VolleyError
-import com.android.volley.toolbox.Volley
 import com.example.vinyls.broker.VolleyBroker
 import com.example.vinyls.models.Album
 import org.json.JSONArray
@@ -72,4 +71,5 @@ class AlbumNwServiceAdapter constructor(context:Context) {
                 onError(it)
             }))
     }
+
 }

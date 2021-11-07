@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="album" type="com.example.vinyls.models.Album"/>
+        <variable name="albums" type="com.example.vinyls.models.Album"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,20 +20,19 @@
             android:layout_width="match_parent"
             android:layout_height="167dp"
             android:scaleType="fitXY"
+            android:contentDescription="@string/desc_album_cover"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-
-            />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/black"
-            android:text="@{album.name}"
+            android:text="@{albums.name}"
             android:textAlignment="textStart"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/primaryTextColor"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -42,9 +41,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/black"
-            android:text="@{album.artistsString}"
+            android:text="@{albums.artistsString}"
             android:textAlignment="textStart"
-            android:textColor="#7D7D7D"
+            android:textColor="@color/secondaryTextColor"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
