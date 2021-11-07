@@ -12,4 +12,6 @@
     <string name="preg_usuario_inicio">Que tipo de usuario eres?</string>
     <string name="inicio_button_visitante">Visitante</string>
     <string name="inicio_button_usuario">Usuario</string>
+    <string name="agregar_cancion_album">Agregar canción</string>
+    <string name="agregar_album">Agregar Album</string>
 </resources>

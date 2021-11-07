@@ -3,11 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-        <variable name="track" type="com.example.vinyls.models.Track"/>
-        <variable name="position" type="Integer" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/songConstraintLayout"
         android:layout_width="match_parent"
@@ -21,7 +16,6 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
-            android:text="@{position}"
             android:textSize="22sp"
             android:textColor="@color/primaryTextColor"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +26,6 @@
             android:id="@+id/NameSongTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{track.name}"
             android:textSize="22sp"
             android:textAlignment="textStart"
             android:textColor="@color/primaryTextColor"
@@ -44,7 +37,6 @@
             android:id="@+id/durationTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{track.duration}"
             android:layout_marginTop="10dp"
             android:textSize="14sp"
             android:textAlignment="textStart"
@@ -52,19 +44,7 @@
             app:layout_constraintStart_toEndOf="@+id/itemNumberTextView"
             app:layout_constraintTop_toBottomOf="@+id/NameSongTextView"
             app:layout_constraintBottom_toBottomOf="parent"/>
-<!--
-        <Button
-            android:id="@+id/viewMoreButton"
-            android:layout_width="20dp"
-            android:layout_height="40dp"
-            android:drawableEnd="@drawable/ic_more_vert"
-            android:textSize="50sp"
-            android:gravity="center"
-            android:backgroundTint="@color/primary_text"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
--->
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
