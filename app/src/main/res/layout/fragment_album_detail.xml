@@ -1,15 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.AlbumsFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/albumRecyclerView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/album_item"/>
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/albumRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/album_item" />
+
+        <TextView
+            android:id="@+id/artistsTitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/artists_title"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            app:layout_constraintTop_toBottomOf="@+id/albumRecyclerView"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/album_artists_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/album_detail_artists_item" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </FrameLayout>
