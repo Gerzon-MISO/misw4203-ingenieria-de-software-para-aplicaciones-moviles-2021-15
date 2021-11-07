@@ -2,11 +2,11 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-<!--
+
     <data>
         <variable name="songs" type="com.example.vinyls.models.Album"/>
     </data>
--->
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/songConstraintLayout"
         android:layout_width="match_parent"

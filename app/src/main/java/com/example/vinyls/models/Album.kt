@@ -34,5 +34,14 @@ data class Album (
         }
         return performer_string
     }
+
+    fun getArtistCover(): String
+    {
+        if (performers.length() > 0)
+        {
+            return "${performers.getJSONObject(0)["image"]}"
+        }
+        return ""
+    }
 }
 

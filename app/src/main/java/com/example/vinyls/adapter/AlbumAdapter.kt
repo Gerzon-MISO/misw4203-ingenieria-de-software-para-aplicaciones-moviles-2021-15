@@ -48,6 +48,11 @@ class AlbumAdapter:RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder>() {
             )
             .into(holder.viewDataBinding.albumImageView)
 
+        Picasso
+            .get()
+            .load(album?.getArtistCover())
+            .into(holder.viewDataBinding.artistImageView)
+
     }
 
     override fun getItemCount(): Int {
