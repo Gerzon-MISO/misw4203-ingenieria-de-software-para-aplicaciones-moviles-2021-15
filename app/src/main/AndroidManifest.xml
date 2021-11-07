@@ -12,9 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Vinyls">
         <activity
-            android:name=".ui.activities.AlbumActivity"
-            android:exported="true" />
-        <activity
             android:name=".ui.activities.MainActivity"
             android:exported="true">
             <intent-filter>
