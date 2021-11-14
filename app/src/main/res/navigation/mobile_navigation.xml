@@ -43,6 +43,6 @@
         android:id="@+id/navigation_artists"
         android:name="com.example.vinyls.ui.fragments.ArtistFragment"
         android:label="Artistas"
-        tools:layout="@layout/fragment_artist" />
+        tools:layout="@layout/fragment_artists" />
 
 </navigation>

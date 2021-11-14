@@ -21,7 +21,7 @@ class ArtistFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_artist, container, false)
+        return inflater.inflate(R.layout.fragment_artists, container, false)
     }
 
 
