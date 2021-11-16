@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-        <variable name="bands" type="com.example.vinyls.models.Band"/>
+        <variable name="musicians" type="com.example.vinyls.models.Musician"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
