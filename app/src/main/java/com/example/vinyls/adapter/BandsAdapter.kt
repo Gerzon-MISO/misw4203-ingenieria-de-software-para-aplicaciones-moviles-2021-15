@@ -34,6 +34,7 @@ class BandsAdapter : RecyclerView.Adapter<BandsAdapter.BandsViewHolder>() {
     override fun onBindViewHolder(holder: BandsAdapter.BandsViewHolder, position: Int) {
         holder.viewDataBinding.also {
             it.bands = bands[position]
+            it.artistNameTextView.text = it.bands?.name
             Picasso.get()
                 .load(it.bands?.image)
                 .placeholder(R.drawable.noimg)

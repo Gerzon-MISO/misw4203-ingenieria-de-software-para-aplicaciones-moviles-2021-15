@@ -34,6 +34,7 @@ class MusiciansAdapter : RecyclerView.Adapter<MusiciansAdapter.MusiciansViewHold
     override fun onBindViewHolder(holder: MusiciansAdapter.MusiciansViewHolder, position: Int) {
         holder.viewDataBinding.also {
             it.musicians = musicians[position]
+            it.artistNameTextView.text = it.musicians?.name
             Picasso.get()
                 .load(it.musicians?.image)
                 .placeholder(R.drawable.noimg)

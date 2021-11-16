@@ -27,13 +27,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_bold"
-            android:textColor="@color/white"
+            android:textColor="@color/secondary_text"
             android:textSize="12sp"
+            android:textAlignment="textStart"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintRight_toRightOf="@+id/artistImageView"
             app:layout_constraintStart_toEndOf="@+id/artistImageView"
-            tools:layout_editor_absoluteY="32dp"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
