@@ -7,35 +7,35 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinyls.R
-import com.example.vinyls.databinding.BandItemBinding
-import com.example.vinyls.models.Band
+import com.example.vinyls.databinding.MusicianItemBinding
+import com.example.vinyls.models.Musician
 import com.example.vinyls.ui.fragments.ArtistsFragment
 import com.squareup.picasso.Picasso
 
 
-class MusiciansAdapter : RecyclerView.Adapter<MusiciansAdapter.BandsViewHolder>() {
+class MusiciansAdapter : RecyclerView.Adapter<MusiciansAdapter.MusiciansViewHolder>() {
 
     var navController: NavController? = null
-    var bands :List<Band> = emptyList()
+    var musicians :List<Musician> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BandsViewHolder {
-        val withDataBinding: BandItemBinding = DataBindingUtil.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusiciansViewHolder {
+        val withDataBinding: MusicianItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            BandsViewHolder.LAYOUT,
+            MusiciansViewHolder.LAYOUT,
             parent,
             false)
-        return BandsViewHolder(withDataBinding)
+        return MusiciansViewHolder(withDataBinding)
     }
 
-    override fun onBindViewHolder(holder: MusiciansAdapter.BandsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MusiciansAdapter.MusiciansViewHolder, position: Int) {
         holder.viewDataBinding.also {
-            it.bands = bands[position]
+            it.musicians = musicians[position]
             Picasso.get()
-                .load(it.bands?.image)
+                .load(it.musicians?.image)
                 .placeholder(R.drawable.noimg)
                 .error(R.drawable.noimg)
                 .into(it.artistImageView)
@@ -49,14 +49,14 @@ class MusiciansAdapter : RecyclerView.Adapter<MusiciansAdapter.BandsViewHolder>(
     }
 
     override fun getItemCount(): Int {
-        return bands.size
+        return musicians.size
     }
 
-    class BandsViewHolder(val viewDataBinding: BandItemBinding) :
+    class MusiciansViewHolder(val viewDataBinding: MusicianItemBinding) :
         RecyclerView.ViewHolder(viewDataBinding.root) {
         companion object {
             @LayoutRes
-            val LAYOUT = R.layout.band_item
+            val LAYOUT = R.layout.musician_item
         }
 
     }

@@ -4,7 +4,7 @@ import android.content.Context
 import com.android.volley.RequestQueue
 import com.android.volley.VolleyError
 import com.example.vinyls.broker.VolleyBroker
-import com.example.vinyls.models.Band
+import com.example.vinyls.models.Musician
 import org.json.JSONArray
 
 class MusicianNwServiceAdapter constructor(context:Context) {
@@ -20,22 +20,21 @@ class MusicianNwServiceAdapter constructor(context:Context) {
     }
 
     private val requestQueue:RequestQueue = volleyBroker.instance
-    fun getBands(onComplete:(resp:List<Band>)->Unit, onError: (error: VolleyError)->Unit){
-        requestQueue.add(volleyBroker.getRequest("bands",
+    fun getMusicians(onComplete:(resp:List<Musician>)->Unit, onError: (error: VolleyError)->Unit){
+        requestQueue.add(volleyBroker.getRequest("musicians",
             { response ->
                 val resp = JSONArray(response)
-                val list = mutableListOf<Band>()
+                val list = mutableListOf<Musician>()
                 for (i in 0 until resp.length()) {
                     val item = resp.getJSONObject(i)
                     list.add(
-                        i, Band(
-                            bandId = item.getInt("id"),
+                        i, Musician(
+                            musicianId = item.getInt("id"),
                             name = item.getString("name"),
                             image = item.getString("image"),
-                            description = item.getString("descrption"),
-                            creationDate = item.getString("creationDate"),
+                            description = item.getString("description"),
+                            birthdate = item.getString("birthdate"),
                             albums = item.getJSONArray("albums"),
-                            musicians = item.getJSONArray("musicians"),
                             performerPrizes = item.getJSONArray("performerPrizes")
                         )
                     )
