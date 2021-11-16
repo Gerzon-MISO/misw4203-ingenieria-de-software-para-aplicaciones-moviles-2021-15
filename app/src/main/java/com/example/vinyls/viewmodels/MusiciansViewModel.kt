@@ -11,7 +11,7 @@ class MusiciansViewModel(application: Application) : AndroidViewModel(applicatio
 
     private val _musicians = MutableLiveData<List<Musician>>()
 
-    val bands:LiveData<List<Musician>>
+    val musicians:LiveData<List<Musician>>
         get() = _musicians
 
     private  var _eventNetworkError = MutableLiveData<Boolean>(false)

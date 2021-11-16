@@ -33,7 +33,7 @@ class MusicianNwServiceAdapter constructor(context:Context) {
                             name = item.getString("name"),
                             image = item.getString("image"),
                             description = item.getString("description"),
-                            birthdate = item.getString("birthdate"),
+                            birthdate = item.getString("birthDate"),
                             albums = item.getJSONArray("albums"),
                             performerPrizes = item.getJSONArray("performerPrizes")
                         )
