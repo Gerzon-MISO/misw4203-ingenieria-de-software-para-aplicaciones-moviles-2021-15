@@ -6,24 +6,12 @@ import com.example.vinyls.models.Collector
 import com.example.vinyls.network.CollectorNwServiceAdapter
 
 class CollectorRepository (val application: Application){
-    fun refreshCollectorsData(callback:(List<Collector>)->Unit, onError:(VolleyError)->Unit)
-    {
-        CollectorNwServiceAdapter.getInstance(application).getCollectors(
-            {
-                callback(it)
-            },
-            onError
-        )
+    suspend fun refreshCollectorsData(): List<Collector>{
+        return CollectorNwServiceAdapter.getInstance(application).getCollectors()
     }
 
-    fun refreshCollectorData(callback:(Collector)->Unit, onError:(VolleyError)->Unit, collectorId:Int)
-    {
-        CollectorNwServiceAdapter.getInstance(application).getCollector(
-            {
-                callback(it)
-            },
-            onError,
-            collectorId
-        )
+    suspend fun refreshCollectorData(collectorId:Int): Collector{
+        return CollectorNwServiceAdapter.getInstance(application).getCollector(collectorId)
     }
+
 }

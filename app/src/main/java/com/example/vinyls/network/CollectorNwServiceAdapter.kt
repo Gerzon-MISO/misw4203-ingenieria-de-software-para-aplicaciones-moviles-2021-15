@@ -8,6 +8,9 @@ import com.example.vinyls.models.Album
 import com.example.vinyls.models.Collector
 import org.json.JSONArray
 import org.json.JSONObject
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 
 class CollectorNwServiceAdapter constructor(context:Context) {
     var volleyBroker:VolleyBroker = VolleyBroker(context.applicationContext)
@@ -23,7 +26,8 @@ class CollectorNwServiceAdapter constructor(context:Context) {
 
 
     private val requestQueue:RequestQueue = volleyBroker.instance
-    fun getCollectors(onComplete:(resp:List<Collector>)->Unit, onError: (error: VolleyError)->Unit){
+
+    suspend fun getCollectors() = suspendCoroutine<List<Collector>>{ cont->
         requestQueue.add(volleyBroker.getRequest("collectors",
             { response ->
                 val resp = JSONArray(response)
@@ -40,14 +44,15 @@ class CollectorNwServiceAdapter constructor(context:Context) {
                         collectorAlbums = item.getJSONArray("collectorAlbums"),
                     ))
                 }
-                onComplete(list)
+                cont.resume(list)
             },
             {
-                onError(it)
-            }))
+                cont.resumeWithException(it)
+            }
+            ))
     }
 
-    fun getCollector(onComplete:(resp:Collector)->Unit, onError: (error: VolleyError)->Unit,collectorId:Int){
+    suspend fun getCollector(collectorId:Int) = suspendCoroutine<Collector>{ cont->
         requestQueue.add(volleyBroker.getRequest("collectors/${collectorId}",
             { response ->
                 val item = JSONObject(response)
@@ -60,12 +65,13 @@ class CollectorNwServiceAdapter constructor(context:Context) {
                     favoritePerformers = item.getJSONArray("favoritePerformers"),
                     collectorAlbums = item.getJSONArray("collectorAlbums"),
                 )
-
-                onComplete(targetAlbum)
+                cont.resume(targetAlbum)
             },
             {
-                onError(it)
-            }))
+                cont.resumeWithException(it)
+            }
+        ))
     }
+
 
 }
