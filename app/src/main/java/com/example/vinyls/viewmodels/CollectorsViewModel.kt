@@ -39,7 +39,7 @@ class CollectorsViewModel(application: Application) :  AndroidViewModel(applicat
         try {
             viewModelScope.launch (Dispatchers.Default){
                 withContext(Dispatchers.IO){
-                    var data = collectorsRepository.refreshCollectorsData()
+                    var data = collectorsRepository.refreshCollectorsData(false)
                     _collectors.postValue(data)
                 }
                 _eventNetworkError.postValue(false)
@@ -53,6 +53,22 @@ class CollectorsViewModel(application: Application) :  AndroidViewModel(applicat
 
     fun onNetworkErrorShown() {
         _isNetworkErrorShown.value = true
+    }
+
+    fun forceRefreshDataFromNetwork(){
+        try {
+            viewModelScope.launch (Dispatchers.Default){
+                withContext(Dispatchers.IO){
+                    var data = collectorsRepository.refreshCollectorsData(true)
+                    _collectors.postValue(data)
+                }
+                _eventNetworkError.postValue(false)
+                _isNetworkErrorShown.postValue(false)
+            }
+        }
+        catch (e:Exception){
+            _eventNetworkError.value = true
+        }
     }
 
     class Factory(val app: Application) : ViewModelProvider.Factory {

@@ -1,6 +1,8 @@
 package com.example.vinyls.ui.fragments
 
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +12,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import com.example.vinyls.R
 import com.example.vinyls.adapter.CollectorsAdapter
 import com.example.vinyls.databinding.FragmentCollectorsBinding
 import com.example.vinyls.models.Collector
 import com.example.vinyls.viewmodels.CollectorsViewModel
+
 
 class CollectorsFragment : Fragment() {
     private var _binding: FragmentCollectorsBinding? = null
@@ -22,7 +27,7 @@ class CollectorsFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private var viewModelAdapter: CollectorsAdapter?= null
     private lateinit var viewModel: CollectorsViewModel
-
+    private var mSwipeRefreshLayout: SwipeRefreshLayout? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +37,17 @@ class CollectorsFragment : Fragment() {
         _binding = FragmentCollectorsBinding.inflate(inflater, container, false)
         val view = binding.root
         viewModelAdapter = CollectorsAdapter()
+        mSwipeRefreshLayout = view.findViewById(R.id.swiperefresh_items);
+        mSwipeRefreshLayout?.setOnRefreshListener {
+            Log.d("Force", "Forcing to retrieveCollectors")
+            viewModel.forceRefreshDataFromNetwork()
+            val handler = Handler()
+            handler.postDelayed({
+                if (mSwipeRefreshLayout!!.isRefreshing) {
+                    mSwipeRefreshLayout?.isRefreshing = false
+                }
+            }, 1000)
+        }
         return view
     }
 
@@ -57,6 +73,7 @@ class CollectorsFragment : Fragment() {
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
             if (isNetworkError) onNetworkError()
         })
+        Log.d("savedInstance", savedInstanceState.toString())
     }
 
     private fun onNetworkError() {
