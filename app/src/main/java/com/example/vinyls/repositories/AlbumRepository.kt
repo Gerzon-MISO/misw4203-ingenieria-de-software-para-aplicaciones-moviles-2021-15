@@ -7,21 +7,25 @@ import com.example.vinyls.network.AlbumNwServiceAdapter
 import com.example.vinyls.network.AlbumsCacheManager
 
 class AlbumRepository(val application: Application) {
-    fun refreshAlbumsData(callback:(List<Album>)->Unit, onError:(VolleyError)->Unit)
+    fun refreshAlbumsData(callback:(List<Album>)->Unit, onError:(VolleyError)->Unit,forcerefresh:Boolean)
     {
-
-        var albumsCache = AlbumsCacheManager.getInstance(application.applicationContext)
-        var potentialResp = albumsCache.getAlbums(intAlbumListIds)
-        AlbumNwServiceAdapter.getInstance(application).getAlbums(
-            {
-                if(potentialResp != null && potentialResp.isEmpty())
+        var albumCacheInstance = AlbumsCacheManager.getInstance(application.applicationContext)
+        var potentialResp = albumCacheInstance.getAlbums()
+        if (potentialResp!!.isEmpty() || forcerefresh)
+        {
+            AlbumNwServiceAdapter.getInstance(application).getAlbums(
                 {
-                    albumsCache.addAlbums(albumListIds = intAlbumListIds,albums=it)
-                }
-                callback(it)
-            },
-            onError
-        )
+                    albumCacheInstance.addAlbums(it)
+                    callback(it)
+                },
+                onError
+            )
+        }
+        else
+        {
+            callback(potentialResp)
+        }
+
     }
 
     fun refreshAlbumData(callback:(Album)->Unit, onError:(VolleyError)->Unit,albumId:Int)

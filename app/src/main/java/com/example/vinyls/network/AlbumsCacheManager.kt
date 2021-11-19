@@ -14,25 +14,14 @@ class AlbumsCacheManager (context: Context) {
             }
     }
 
-    private var albumscache:HashMap<Int,List<Album>> = hashMapOf()
-    fun addAlbums(key:Int,albums:List<Album>)
+    private var albumscache:List<Album> = mutableListOf()
+    fun addAlbums(albums:List<Album>)
     {
-        if(!albumscache.containsKey(key))
-        {
-            albumscache[key] = albums
-        }
+        albumscache = albums
     }
 
-    fun getAlbums(key:Int): List<Album>?
+    fun getAlbums(): List<Album>?
     {
-        var listToReturn = listOf<Album>()
-        if (albumscache.containsKey(key))
-        {
-            return albumscache[key]
-        }
-        else
-        {
-            return listToReturn
-        }
+        return if(albumscache.isNotEmpty()) albumscache else mutableListOf()
     }
 }
