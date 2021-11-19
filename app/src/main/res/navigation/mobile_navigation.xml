@@ -55,13 +55,17 @@
 
     <fragment
         android:id="@+id/navigation_create_track"
-        android:name="com.example.vinyls.ui.fragments.CollectorFragment"
+        android:name="com.example.vinyls.ui.fragments.CreateTrackFragment"
         android:label="Crear cacnción"
         tools:layout="@layout/fragment_create_track">
 
         <action
             android:id="@+id/action_createTrackFragment_to_albumDetailFragment"
             app:destination="@+id/navigation_album_detail"/>
+
+        <argument
+            android:name="album"
+            app:argType="com.example.vinyls.models.Album"/>
 
     </fragment>
 

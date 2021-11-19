@@ -1,8 +1,12 @@
 package com.example.vinyls.models
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 import org.json.JSONArray
 
 
+@Parcelize
 data class Album (
     val albumId:Int,
     val name:String,
@@ -11,10 +15,10 @@ data class Album (
     val description:String,
     val genre:String,
     val recordLabel:String,
-    val tracks: JSONArray,
-    val performers:JSONArray,
-    val comments:JSONArray
-)
+    val tracks: @RawValue JSONArray,
+    val performers: @RawValue JSONArray,
+    val comments: @RawValue JSONArray
+) : Parcelable
 {
     fun getArtistsString():String
     {

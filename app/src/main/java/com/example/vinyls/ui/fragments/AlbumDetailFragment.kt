@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,6 +31,7 @@ class AlbumDetailFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var artistsRecyclerView: RecyclerView
     private lateinit var trackRecyclerView: RecyclerView
+    private lateinit var album: Album
 
     private lateinit var viewModel: AlbumViewModel
     private var viewModelAdapter: AlbumAdapter? = null
@@ -41,14 +43,6 @@ class AlbumDetailFragment : Fragment() {
         _binding = FragmentAlbumDetailBinding.inflate(inflater, container, false)
         val view = binding.root
         viewModelAdapter = AlbumAdapter()
-
-        val createTrackButton : AppCompatButton = view.findViewById(R.id.agregar_cancion_but)
-        createTrackButton.setOnClickListener {
-            val fragmentCreateTrack = CreateTrackFragment()
-            val transaction = fragmentManager?.beginTransaction()
-            transaction?.replace(R.id.nav_host_fragment, fragmentCreateTrack)?.commit()
-        }
-
         return view
     }
 
@@ -64,6 +58,12 @@ class AlbumDetailFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = viewModelAdapter
 
+        val createTrackButton : AppCompatButton = view.findViewById(R.id.agregar_cancion_but)
+        createTrackButton.setOnClickListener {
+            println(album)
+            val action = AlbumDetailFragmentDirections.actionAlbumDetailFragmentToCreateTrackFragment(album)
+            view.findNavController().navigate(action)
+        }
     }
 
 
@@ -78,10 +78,10 @@ class AlbumDetailFragment : Fragment() {
         viewModel = ViewModelProvider(this,AlbumViewModel.Factory(activity.application,args.albumId)).get(AlbumViewModel::class.java)
         viewModel.album.observe(viewLifecycleOwner,Observer<Album>
         {
+            album = it
             viewModelAdapter?.album = it
             artistsRecyclerView.adapter = AlbumArtistsAdapter(it.performers)
             trackRecyclerView.adapter = AlbumTracksAdapter(it.tracks)
-
         })
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
             if (isNetworkError) onNetworkError()
