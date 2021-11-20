@@ -6,41 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.AlbumsFragment">
 
-    <ScrollView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_height="match_parent"
+        android:id="@+id/swipe_refresh_albums"
+        >
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/albumsRv"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/album_item" />
+                android:layout_height="match_parent">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/agregar_album_but"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="20dp"
-                android:background="@drawable/button_styled"
-                android:radius="10dp"
-                android:stateListAnimator="@null"
-                android:text="@string/agregar_album"
-                android:textColor="#424242"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/albumsRv" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/albumsRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:listitem="@layout/album_item" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/agregar_album_but"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="20dp"
+                    android:background="@drawable/button_styled"
+                    android:radius="10dp"
+                    android:stateListAnimator="@null"
+                    android:text="@string/agregar_album"
+                    android:textColor="#424242"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/albumsRv" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </ScrollView>
+        </ScrollView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
 </FrameLayout>

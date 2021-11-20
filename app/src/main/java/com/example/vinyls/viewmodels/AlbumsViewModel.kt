@@ -26,17 +26,31 @@ class AlbumsViewModel(application: Application) :  AndroidViewModel(application)
         get() = _isNetworkErrorShown
 
     init {
-        refreshDataFromNetwork()
+        refreshData()
     }
 
-    private fun refreshDataFromNetwork() {
+    private fun refreshData() {
         albumsRepository.refreshAlbumsData({
             _albums.postValue(it)
             _eventNetworkError.value = false
             _isNetworkErrorShown.value = false
         },{
             _eventNetworkError.value = true
-        })
+        },
+            false
+        )
+    }
+
+    fun forceRefreshDataFromNetwork() {
+        albumsRepository.refreshAlbumsData({
+            _albums.postValue(it)
+            _eventNetworkError.value = false
+            _isNetworkErrorShown.value = false
+        },{
+            _eventNetworkError.value = true
+        },
+            true
+        )
     }
 
     fun onNetworkErrorShown() {

@@ -1,6 +1,7 @@
 package com.example.vinyls.ui.fragments
 
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.vinyls.R
 import com.example.vinyls.adapter.AlbumsAdapter
 import com.example.vinyls.databinding.FragmentAlbumsBinding
@@ -22,6 +24,7 @@ class AlbumsFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private var viewModelAdapter: AlbumsAdapter?= null
     private lateinit var viewModel: AlbumsViewModel
+    private var mSwipeRefreshLayout: SwipeRefreshLayout? = null
 
 
     override fun onCreateView(
@@ -32,6 +35,16 @@ class AlbumsFragment : Fragment() {
         _binding = FragmentAlbumsBinding.inflate(inflater, container, false)
         val view = binding.root
         viewModelAdapter = AlbumsAdapter()
+        mSwipeRefreshLayout = view.findViewById(R.id.swipe_refresh_albums);
+        mSwipeRefreshLayout?.setOnRefreshListener {
+            viewModel.forceRefreshDataFromNetwork()
+            val handler = Handler()
+            handler.postDelayed({
+                if (mSwipeRefreshLayout!!.isRefreshing) {
+                    mSwipeRefreshLayout?.isRefreshing = false
+                }
+            }, 1000)
+        }
         return view
     }
 
