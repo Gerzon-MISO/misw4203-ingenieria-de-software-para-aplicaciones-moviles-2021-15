@@ -29,15 +29,15 @@ class AlbumRepository(val application: Application) {
 
     }
 
-    fun refreshAlbumData(callback:(Album)->Unit, onError:(VolleyError)->Unit,albumId:Int)
+    fun refreshAlbumData(callback:(Album)->Unit, onError:(VolleyError)->Unit,albumId:Int, forcerefresh:Boolean)
     {
         var albumCacheInstance = AlbumCacheManager.getInstance(application.applicationContext)
         var potentialResp = albumCacheInstance.getAlbum(albumId)
-        if(potentialResp == null)
+        if(potentialResp == null || forcerefresh)
         {
             AlbumNwServiceAdapter.getInstance(application).getAlbum(
                 {
-                    albumCacheInstance.addAlbum(albumId,it)
+                    albumCacheInstance.addAlbum(albumId,it,forcerefresh)
                     callback(it)
                 },
                 onError,

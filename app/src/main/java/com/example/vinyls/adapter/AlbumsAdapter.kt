@@ -32,6 +32,7 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumsViewHolder>(){
     }
 
     override fun onBindViewHolder(holder: AlbumsViewHolder, position: Int) {
+
         holder.viewDataBinding.also {
             it.albums = albums[position]
             Picasso.get()
@@ -42,7 +43,7 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumsViewHolder>(){
         }
 
         holder.viewDataBinding.root.setOnClickListener {
-            val action = AlbumsFragmentDirections.actionAlbumsFragmentToAlbumDetailFragment(albums[position].albumId)
+            val action = AlbumsFragmentDirections.actionAlbumsFragmentToAlbumDetailFragment(albums[position].albumId,false)
             println(action)
             holder.viewDataBinding.root.findNavController().navigate(action)
         }

@@ -77,7 +77,7 @@ class CreateTrackFragment : Fragment() {
                 val duration = "$durationMinutes:$durationSeconds"
                 val track = Track(0, trackName, duration)
                 sendData(track)
-                val action = CreateTrackFragmentDirections.actionCreateTrackFragmentToAlbumDetailFragment(album.albumId)
+                val action = CreateTrackFragmentDirections.actionCreateTrackFragmentToAlbumDetailFragment(album.albumId,true)
                 viewAlbum.findNavController().navigate(action)
             }
         }

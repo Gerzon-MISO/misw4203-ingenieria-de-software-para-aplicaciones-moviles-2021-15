@@ -15,11 +15,12 @@ class AlbumCacheManager(context:Context) {
     }
 
     private var albumcache:HashMap<Int,Album> = hashMapOf()
-    fun addAlbum(key:Int,albums:Album)
+    fun addAlbum(key:Int,albums:Album,forceRef:Boolean)
     {
-        if(!albumcache.containsKey(key))
+        if(!albumcache.containsKey(key) || forceRef)
         {
             albumcache[key] = albums
+            println(albums.tracks)
         }
 
     }

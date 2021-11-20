@@ -26,6 +26,9 @@
         <argument
             android:name="albumId"
             app:argType="integer"/>
+        <argument
+            android:name="refresh"
+            app:argType="boolean"/>
 
         <action
             android:id="@+id/action_albumDetailFragment_to_albumsFragment"

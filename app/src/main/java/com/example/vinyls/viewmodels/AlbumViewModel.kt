@@ -6,10 +6,11 @@ import com.example.vinyls.models.Album
 import com.example.vinyls.network.AlbumNwServiceAdapter
 import com.example.vinyls.repositories.AlbumRepository
 
-class AlbumViewModel(application: Application,albumId: Int) :  AndroidViewModel(application) {
+class AlbumViewModel(application: Application,albumId: Int, forcerefresh:Boolean) :  AndroidViewModel(application) {
 
     private val albumsRepository = AlbumRepository(application)
     private val _albumId = albumId
+    private val forceRef = forcerefresh
 
 
     private val _album = MutableLiveData<Album>()
@@ -32,6 +33,10 @@ class AlbumViewModel(application: Application,albumId: Int) :  AndroidViewModel(
     }
 
     private fun refreshDataFromNetwork() {
+        if(forceRef==true)
+        {
+            Thread.sleep(500)
+        }
         albumsRepository.refreshAlbumData({
             _album.postValue(it)
             _eventNetworkError.value = false
@@ -40,6 +45,7 @@ class AlbumViewModel(application: Application,albumId: Int) :  AndroidViewModel(
             _eventNetworkError.value = true
         },
             _albumId
+        ,   forceRef
         )
     }
 
@@ -47,11 +53,11 @@ class AlbumViewModel(application: Application,albumId: Int) :  AndroidViewModel(
         _isNetworkErrorShown.value = true
     }
 
-    class Factory(val app: Application,val albumId:Int) : ViewModelProvider.Factory {
+    class Factory(val app: Application,val albumId:Int,val forcerefresh: Boolean) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(AlbumViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return AlbumViewModel(app,albumId) as T
+                return AlbumViewModel(app,albumId,forcerefresh) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }

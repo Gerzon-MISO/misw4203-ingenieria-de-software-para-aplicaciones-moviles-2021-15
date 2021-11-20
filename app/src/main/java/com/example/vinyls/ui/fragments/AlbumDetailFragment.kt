@@ -74,7 +74,7 @@ class AlbumDetailFragment : Fragment() {
         }
         println(activity.actionBar?.title)
 
-        viewModel = ViewModelProvider(this,AlbumViewModel.Factory(activity.application,args.albumId)).get(AlbumViewModel::class.java)
+        viewModel = ViewModelProvider(this,AlbumViewModel.Factory(activity.application,args.albumId,args.refresh)).get(AlbumViewModel::class.java)
         viewModel.album.observe(viewLifecycleOwner,Observer<Album>
         {
             album = it
