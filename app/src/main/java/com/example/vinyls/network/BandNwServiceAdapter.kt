@@ -40,7 +40,6 @@ class BandNwServiceAdapter constructor(context:Context) {
                         )
                     )
                 }
-                println(list)
                 onComplete(list)
             },
             {
