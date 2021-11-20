@@ -31,6 +31,10 @@
             android:id="@+id/action_albumDetailFragment_to_albumsFragment"
             app:destination="@+id/navigation_albums"/>
 
+        <action
+            android:id="@+id/action_albumDetailFragment_to_createTrackFragment"
+            app:destination="@+id/navigation_create_track" />
+
     </fragment>
 
     <fragment
@@ -48,5 +52,21 @@
         android:name="com.example.vinyls.ui.fragments.ArtistsFragment"
         android:label="Artistas"
         tools:layout="@layout/fragment_artists" />
+
+    <fragment
+        android:id="@+id/navigation_create_track"
+        android:name="com.example.vinyls.ui.fragments.CreateTrackFragment"
+        android:label="Crear cacnción"
+        tools:layout="@layout/fragment_create_track">
+
+        <action
+            android:id="@+id/action_createTrackFragment_to_albumDetailFragment"
+            app:destination="@+id/navigation_album_detail"/>
+
+        <argument
+            android:name="album"
+            app:argType="com.example.vinyls.models.Album"/>
+
+    </fragment>
 
 </navigation>

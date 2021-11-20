@@ -16,4 +16,7 @@
     <string name="agregar_album">Agregar Album</string>
     <string name="agregar_collector">Agregar Coleccionista</string>
     <string name="agregar_artista">Agregar Artista</string>
+    <string name="album_title">Album title</string>
+    <string name="track_name_field">Nombre de la canción</string>
+    <string name="text_save_button">Guardar</string>
 </resources>
