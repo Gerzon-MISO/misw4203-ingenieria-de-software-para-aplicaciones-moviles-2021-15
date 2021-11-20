@@ -16,9 +16,7 @@ class CacheManager(context: Context) {
 
     private var collectors: List<Collector> = mutableListOf()
     fun addCollectors(newCollectors: List<Collector>){
-        if (collectors.isEmpty()){
             collectors = newCollectors
-        }
     }
     fun getCollectors() : List<Collector>{
         return if (collectors.isNotEmpty()) collectors else mutableListOf()
