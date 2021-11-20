@@ -14,5 +14,6 @@
     <string name="inicio_button_usuario">Usuario</string>
     <string name="agregar_cancion_album">Agregar canción</string>
     <string name="agregar_album">Agregar Album</string>
+    <string name="agregar_collector">Agregar Coleccionista</string>
     <string name="agregar_artista">Agregar Artista</string>
 </resources>

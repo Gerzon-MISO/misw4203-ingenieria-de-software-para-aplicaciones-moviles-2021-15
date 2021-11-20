@@ -35,9 +35,13 @@
 
     <fragment
         android:id="@+id/navigation_collectors"
-        android:name="com.example.vinyls.ui.fragments.CollectorFragment"
+        android:name="com.example.vinyls.ui.fragments.CollectorsFragment"
         android:label="Coleccionistas"
-        tools:layout="@layout/fragment_collector" />
+        tools:layout="@layout/fragment_collector" >
+        <action
+            android:id="@+id/action_collectorsFragment_to_collectorDetailFragment"
+            app:destination="@+id/navigation_collector_detail"/>
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_artists"
