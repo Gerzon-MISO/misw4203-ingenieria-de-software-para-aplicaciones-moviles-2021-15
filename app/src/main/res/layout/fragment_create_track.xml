@@ -78,6 +78,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_bold"
                     android:hint="@string/track_name_field"
+                    android:maxLength="50"
                     android:textColor="@color/white"
                     android:inputType="text"
                     android:textSize="20sp"/>
@@ -102,6 +103,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_bold"
                     android:hint="Minutos"
+                    android:maxLength="2"
                     android:inputType="number"
                     android:textColor="@color/white"
                     android:textSize="20sp"/>
@@ -127,6 +129,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_bold"
                     android:hint="Segundos"
+                    android:maxLength="2"
                     android:textColor="@color/white"
                     android:inputType="number"
                     android:textSize="20sp"/>

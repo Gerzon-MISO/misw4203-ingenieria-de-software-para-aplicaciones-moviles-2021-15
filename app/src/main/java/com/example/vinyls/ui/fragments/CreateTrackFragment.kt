@@ -1,52 +1,99 @@
 package com.example.vinyls.ui.fragments
 
+import android.graphics.PointF
 import android.os.Bundle
+import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.widget.AppCompatButton
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.vinyls.R
+import com.example.vinyls.models.Album
 import com.example.vinyls.models.Track
 import com.example.vinyls.viewmodels.TrackViewModel
-import com.google.android.material.textfield.TextInputEditText
+import com.squareup.picasso.Picasso
+import jp.wasabeef.picasso.transformations.gpu.VignetteFilterTransformation
+import kotlinx.android.synthetic.main.fragment_create_track.*
+
 
 class CreateTrackFragment : Fragment() {
 
     private lateinit var viewModel: TrackViewModel
+    private lateinit var album: Album
+    private lateinit var viewAlbum: View
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_create_track, container, false)
-        val saveButton: AppCompatButton = view.findViewById(R.id.saveButton)
-        val trackNameEditText = view.findViewById(R.id.trackNameEditText) as TextInputEditText
-        val secondsDurationEditText = view.findViewById(R.id.secondsDurationEditText) as TextInputEditText
-        val minutesDurationEditText = view.findViewById(R.id.minutesDurationEditText) as TextInputEditText
+        val args: CreateTrackFragmentArgs by navArgs()
+        album = args.album
+        return inflater.inflate(R.layout.fragment_create_track, container, false)
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewAlbum = view
+        this.setOnClickListener()
+        Picasso
+            .get()
+            .load(album.cover)
+            .placeholder(R.drawable.noimg)
+            .error(R.drawable.noimg)
+            .transform(
+                VignetteFilterTransformation(
+                    albumImageView.context,
+                    PointF(0.5f, 0.5f),
+                    floatArrayOf(0.0f, 0.0f, 0.0f),
+                    0.0f,
+                    0.5f
+                )
+            )
+            .into(albumImageView)
+        albumTitleTextView.text = album.name
+    }
+
+    private fun setOnClickListener() {
         saveButton.setOnClickListener {
             val trackName = trackNameEditText.text.toString()
-            val durationMinutes = secondsDurationEditText.text.toString()
-            val durationSeconds = minutesDurationEditText.text.toString()
-            val duration = "$durationMinutes:$durationSeconds"
-            val track = Track(0, trackName, duration)
-            this.sendData(track)
-            //val fragmentDetailAlbum = AlbumDetailFragment()
-            //val transaction = fragmentManager?.beginTransaction()
-            //transaction?.replace(R.id.nav_host_fragment, fragmentDetailAlbum)?.commit()
+            val durationMinutes = minutesDurationEditText.text.toString()
+            val durationSeconds = secondsDurationEditText.text.toString()
+
+            if (TextUtils.isEmpty(trackName)) {
+                trackNameEditText.error = "El nombre es requerido!"
+            }
+            if (TextUtils.isEmpty(durationMinutes)) {
+                minutesDurationEditText.error = "Los minutos son requeridos!"
+            }
+            if (TextUtils.isEmpty(durationSeconds)) {
+                secondsDurationEditText.error = "Los segundos son requeridos!"
+            }
+
+            if (this.formIsValid(trackName, durationMinutes, durationSeconds)) {
+                val duration = "$durationMinutes:$durationSeconds"
+                val track = Track(0, trackName, duration)
+                sendData(track)
+                val action = CreateTrackFragmentDirections.actionCreateTrackFragmentToAlbumDetailFragment(album.albumId)
+                viewAlbum.findNavController().navigate(action)
+            }
         }
-        return view
+    }
+
+    private fun formIsValid(trackName: String, durationMinutes: String, durationSeconds: String): Boolean {
+        if (TextUtils.isEmpty(trackName) || TextUtils.isEmpty(durationMinutes) || TextUtils.isEmpty(durationSeconds)){
+            return false
+        }
+        return true
     }
 
     private fun sendData(track: Track) {
-        val args: CreateTrackFragmentArgs by navArgs()
         viewModel = ViewModelProvider(
             this,
-            TrackViewModel.Factory(activity!!.application, args.album.albumId, track)).get(TrackViewModel::class.java)
+            TrackViewModel.Factory(activity!!.application, album.albumId, track)).get(TrackViewModel::class.java)
         viewModel.eventNetworkError.observe(viewLifecycleOwner, {
             isNetworkError -> if (isNetworkError) onNetworkError()
         })

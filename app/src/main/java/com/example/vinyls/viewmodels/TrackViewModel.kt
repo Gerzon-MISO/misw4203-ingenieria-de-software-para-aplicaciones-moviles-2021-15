@@ -28,7 +28,11 @@ class TrackViewModel(application: Application, albumId: Int, track: Track) : And
     private val _albumId = albumId
     private val _track = track
 
-    fun pushData() {
+    init {
+        pushData()
+    }
+
+    private fun pushData() {
         try {
             viewModelScope.launch(Dispatchers.Default) {
                 withContext(Dispatchers.IO) {

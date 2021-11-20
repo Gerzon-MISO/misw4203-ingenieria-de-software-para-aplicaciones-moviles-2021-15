@@ -60,7 +60,6 @@ class AlbumDetailFragment : Fragment() {
 
         val createTrackButton : AppCompatButton = view.findViewById(R.id.agregar_cancion_but)
         createTrackButton.setOnClickListener {
-            println(album)
             val action = AlbumDetailFragmentDirections.actionAlbumDetailFragmentToCreateTrackFragment(album)
             view.findNavController().navigate(action)
         }
@@ -88,7 +87,6 @@ class AlbumDetailFragment : Fragment() {
         })
 
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
