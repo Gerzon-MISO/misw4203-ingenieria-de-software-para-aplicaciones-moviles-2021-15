@@ -8,8 +8,10 @@ import com.example.vinyls.models.Album
 import org.json.JSONArray
 import org.json.JSONObject
 
+
 class AlbumNwServiceAdapter constructor(context:Context) {
-    var volleyBroker:VolleyBroker = VolleyBroker(context.applicationContext)
+
+    private var volleyBroker:VolleyBroker = VolleyBroker(context.applicationContext)
     companion object{
         var instance: AlbumNwServiceAdapter? = null
         fun getInstance(context: Context) =

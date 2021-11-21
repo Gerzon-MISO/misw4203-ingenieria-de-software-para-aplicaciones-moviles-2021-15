@@ -8,7 +8,10 @@ import com.example.vinyls.models.Band
 import org.json.JSONArray
 
 class BandNwServiceAdapter constructor(context:Context) {
-    var volleyBroker:VolleyBroker = VolleyBroker(context.applicationContext)
+
+    private var volleyBroker:VolleyBroker = VolleyBroker(context.applicationContext)
+    private val requestQueue:RequestQueue = volleyBroker.instance
+
     companion object{
         var instance: BandNwServiceAdapter? = null
         fun getInstance(context: Context) =
@@ -19,7 +22,6 @@ class BandNwServiceAdapter constructor(context:Context) {
             }
     }
 
-    private val requestQueue:RequestQueue = volleyBroker.instance
     fun getBands(onComplete:(resp:List<Band>)->Unit, onError: (error: VolleyError)->Unit){
         requestQueue.add(volleyBroker.getRequest("bands",
             { response ->

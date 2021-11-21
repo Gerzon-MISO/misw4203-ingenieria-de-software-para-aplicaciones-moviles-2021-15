@@ -6,28 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.vinyls.R
 import com.example.vinyls.adapter.BandsAdapter
 import com.example.vinyls.adapter.MusiciansAdapter
 import com.example.vinyls.databinding.FragmentArtistsBinding
-import com.example.vinyls.models.Band
-import com.example.vinyls.models.Musician
 import com.example.vinyls.viewmodels.BandsViewModel
 import com.example.vinyls.viewmodels.MusiciansViewModel
 
+
 class ArtistsFragment : Fragment() {
+
     private var _binding: FragmentArtistsBinding? = null
     private val binding get() = _binding!!
-
-
     private lateinit var bandsRecyclerView: RecyclerView
     private lateinit var musiciansRecyclerView: RecyclerView
-
     private var bandsViewModelAdapter: BandsAdapter?= null
     private lateinit var bandsViewModel: BandsViewModel
     private var musiciansViewModelAdapter: MusiciansAdapter?= null
@@ -36,7 +31,7 @@ class ArtistsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentArtistsBinding.inflate(inflater, container, false)
         val view = binding.root
@@ -62,21 +57,21 @@ class ArtistsFragment : Fragment() {
         }
         activity.actionBar?.title = "Artistas"
         bandsViewModel = ViewModelProvider(this, BandsViewModel.Factory(activity.application)).get(BandsViewModel::class.java)
-        bandsViewModel.bands.observe(viewLifecycleOwner, Observer<List<Band>> {
+        bandsViewModel.bands.observe(viewLifecycleOwner, {
             it.apply {
                 bandsViewModelAdapter!!.bands = this
             }
         })
-        bandsViewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
+        bandsViewModel.eventNetworkError.observe(viewLifecycleOwner, { isNetworkError ->
             if (isNetworkError) onNetworkError()
         })
         musiciansViewModel = ViewModelProvider(this, MusiciansViewModel.Factory(activity.application)).get(MusiciansViewModel::class.java)
-        musiciansViewModel.musicians.observe(viewLifecycleOwner, Observer<List<Musician>> {
+        musiciansViewModel.musicians.observe(viewLifecycleOwner, {
             it.apply {
                 musiciansViewModelAdapter!!.musicians = this
             }
         })
-        musiciansViewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
+        musiciansViewModel.eventNetworkError.observe(viewLifecycleOwner, { isNetworkError ->
             if (isNetworkError) onNetworkError()
         })
     }

@@ -8,20 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import com.example.vinyls.R
 import com.example.vinyls.adapter.CollectorsAdapter
 import com.example.vinyls.databinding.FragmentCollectorsBinding
-import com.example.vinyls.models.Collector
 import com.example.vinyls.viewmodels.CollectorsViewModel
 
 
 class CollectorsFragment : Fragment() {
+
     private var _binding: FragmentCollectorsBinding? = null
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
@@ -32,12 +30,12 @@ class CollectorsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentCollectorsBinding.inflate(inflater, container, false)
         val view = binding.root
         viewModelAdapter = CollectorsAdapter()
-        mSwipeRefreshLayout = view.findViewById(R.id.swiperefresh_items);
+        mSwipeRefreshLayout = view.findViewById(R.id.swiperefresh_items)
         mSwipeRefreshLayout?.setOnRefreshListener {
             Log.d("Force", "Forcing to retrieveCollectors")
             viewModel.forceRefreshDataFromNetwork()
@@ -65,12 +63,12 @@ class CollectorsFragment : Fragment() {
         activity.actionBar?.title = getString(R.string.title_collectors)
         viewModel = ViewModelProvider(this, CollectorsViewModel.Factory(activity.application)).get(
             CollectorsViewModel::class.java)
-        viewModel.collectors.observe(viewLifecycleOwner, Observer<List<Collector>> {
+        viewModel.collectors.observe(viewLifecycleOwner, {
             it.apply {
                 viewModelAdapter!!.collectors = this
             }
         })
-        viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
+        viewModel.eventNetworkError.observe(viewLifecycleOwner, { isNetworkError ->
             if (isNetworkError) onNetworkError()
         })
         Log.d("savedInstance", savedInstanceState.toString())

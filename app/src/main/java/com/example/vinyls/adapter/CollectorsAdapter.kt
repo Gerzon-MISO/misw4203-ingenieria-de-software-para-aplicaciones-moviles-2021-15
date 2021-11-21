@@ -1,9 +1,9 @@
 package com.example.vinyls.adapter
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinyls.R
 import com.example.vinyls.databinding.CollectorItemBinding
@@ -14,7 +14,6 @@ import com.squareup.picasso.Picasso
 
 class CollectorsAdapter : RecyclerView.Adapter<CollectorsAdapter.CollectorsViewHolder>(){
 
-    var navController: NavController? = null
     var collectors :List<Collector> = emptyList()
         set(value) {
             field = value
@@ -41,10 +40,7 @@ class CollectorsAdapter : RecyclerView.Adapter<CollectorsAdapter.CollectorsViewH
         }
 
         holder.viewDataBinding.root.setOnClickListener {
-            val action = CollectorsFragmentDirections
             CollectorsFragmentDirections.actionCollectorsFragmentToCollectorDetailFragment()
-            println(action)
-            //holder.viewDataBinding.root.findNavController().navigate(action)
         }
     }
 

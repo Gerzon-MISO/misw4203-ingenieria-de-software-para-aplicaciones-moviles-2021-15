@@ -11,7 +11,10 @@ import kotlin.coroutines.suspendCoroutine
 
 class NetworkServiceAdapter constructor(context: Context) {
 
-    var volleyBroker: VolleyBroker = VolleyBroker(context.applicationContext)
+    private var volleyBroker: VolleyBroker = VolleyBroker(context.applicationContext)
+    private val requestQueue: RequestQueue by lazy {
+        volleyBroker.instance
+    }
 
     companion object {
         var instance: NetworkServiceAdapter? = null
@@ -21,10 +24,6 @@ class NetworkServiceAdapter constructor(context: Context) {
                    instance = it
                 }
             }
-    }
-
-    private val requestQueue: RequestQueue by lazy {
-        volleyBroker.instance
     }
 
     suspend fun postTrack(body: JSONObject, albumId: Int) = suspendCoroutine<Boolean>  {

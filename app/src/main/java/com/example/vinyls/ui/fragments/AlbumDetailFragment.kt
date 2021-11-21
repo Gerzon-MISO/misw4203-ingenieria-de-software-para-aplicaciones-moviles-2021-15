@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
@@ -39,7 +38,7 @@ class AlbumDetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAlbumDetailBinding.inflate(inflater, container, false)
         val view = binding.root
         viewModelAdapter = AlbumAdapter()
@@ -65,27 +64,23 @@ class AlbumDetailFragment : Fragment() {
         }
     }
 
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val args: AlbumDetailFragmentArgs by navArgs()
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
-        println(activity.actionBar?.title)
 
         viewModel = ViewModelProvider(this,AlbumViewModel.Factory(activity.application,args.albumId,args.refresh)).get(AlbumViewModel::class.java)
-        viewModel.album.observe(viewLifecycleOwner,Observer<Album>
-        {
+        viewModel.album.observe(viewLifecycleOwner, {
             album = it
             viewModelAdapter?.album = it
             artistsRecyclerView.adapter = AlbumArtistsAdapter(it.performers)
             trackRecyclerView.adapter = AlbumTracksAdapter(it.tracks)
         })
-        viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
+        viewModel.eventNetworkError.observe(viewLifecycleOwner, { isNetworkError ->
             if (isNetworkError) onNetworkError()
         })
-
     }
 
     override fun onDestroyView() {

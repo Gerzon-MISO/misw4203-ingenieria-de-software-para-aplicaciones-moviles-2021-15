@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import com.example.vinyls.models.Musician
 import com.example.vinyls.repositories.ArtistRepository
 
+
 class MusiciansViewModel(application: Application) : AndroidViewModel(application) {
 
     private val artistRepository = ArtistRepository(application)
@@ -14,12 +15,12 @@ class MusiciansViewModel(application: Application) : AndroidViewModel(applicatio
     val musicians:LiveData<List<Musician>>
         get() = _musicians
 
-    private  var _eventNetworkError = MutableLiveData<Boolean>(false)
+    private  var _eventNetworkError = MutableLiveData(false)
 
     val eventNetworkError: LiveData<Boolean>
         get() = _eventNetworkError
 
-    private var _isNetworkErrorShown = MutableLiveData<Boolean>(false)
+    private var _isNetworkErrorShown = MutableLiveData(false)
 
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown

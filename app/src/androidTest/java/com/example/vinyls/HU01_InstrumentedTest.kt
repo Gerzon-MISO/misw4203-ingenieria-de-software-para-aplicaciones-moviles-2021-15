@@ -1,21 +1,13 @@
 package com.example.vinyls
 
-//import android.R
-import com.example.vinyls.R
-import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.ViewInteraction
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
-import com.example.vinyls.ui.activities.MainActivity
 import com.example.vinyls.ui.activities.UserSelectionActivity
 import org.hamcrest.Matchers.allOf
-import org.hamcrest.core.IsInstanceOf
-import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -27,7 +19,7 @@ import org.junit.runner.RunWith
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 @RunWith(AndroidJUnit4::class)
-class HU01_InstrumentedTest {
+class HU01Test {
 
     @Rule
     @JvmField
@@ -40,7 +32,6 @@ class HU01_InstrumentedTest {
         // Inicia con usuario "Visitante"
         val visitorsBtn =
             onView(allOf(withId(R.id.button3), withText("VISITANTE"),
-                //withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java)),
                 isDisplayed()
             ))
         visitorsBtn.check(matches(isDisplayed()))
@@ -50,7 +41,6 @@ class HU01_InstrumentedTest {
         //Revisa que exista el boton de album y lo pulsa
         val albumsBtn =
             onView(allOf(withId(R.id.navigation_albums),
-                //withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java)),
                 isDisplayed()
             ))
         albumsBtn.check(matches(isDisplayed()))
@@ -63,6 +53,5 @@ class HU01_InstrumentedTest {
                 isDisplayed()
             ))
        albumText.check(matches(isDisplayed()))
-
     }
 }
