@@ -28,8 +28,9 @@ class AlbumNwServiceAdapter constructor(context:Context) {
             { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Album>()
+                var item: JSONObject? = null
                 for (i in 0 until resp.length()) {
-                    val item = resp.getJSONObject(i)
+                    item = resp.getJSONObject(i)
                     list.add(i, Album(
                         albumId = item.getInt("id"),
                         name = item.getString("name"),
