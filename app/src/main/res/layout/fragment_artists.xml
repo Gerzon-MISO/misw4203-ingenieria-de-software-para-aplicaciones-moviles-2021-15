@@ -60,7 +60,6 @@
                 tools:listitem="@layout/band_item"
                 />
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/agregar_artist_but"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="20dp"

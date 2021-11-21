@@ -3,27 +3,25 @@ package com.example.vinyls.viewmodels
 import android.app.Application
 import androidx.lifecycle.*
 import com.example.vinyls.models.Album
-import com.example.vinyls.network.AlbumNwServiceAdapter
 import com.example.vinyls.repositories.AlbumRepository
+
 
 class AlbumViewModel(application: Application,albumId: Int, forcerefresh:Boolean) :  AndroidViewModel(application) {
 
     private val albumsRepository = AlbumRepository(application)
     private val _albumId = albumId
     private val forceRef = forcerefresh
-
-
     private val _album = MutableLiveData<Album>()
 
     val album: LiveData<Album>
         get() = _album
 
-    private var _eventNetworkError = MutableLiveData<Boolean>(false)
+    private var _eventNetworkError = MutableLiveData(false)
 
     val eventNetworkError: LiveData<Boolean>
         get() = _eventNetworkError
 
-    private var _isNetworkErrorShown = MutableLiveData<Boolean>(false)
+    private var _isNetworkErrorShown = MutableLiveData(false)
 
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
@@ -33,7 +31,7 @@ class AlbumViewModel(application: Application,albumId: Int, forcerefresh:Boolean
     }
 
     private fun refreshDataFromNetwork() {
-        if(forceRef==true)
+        if(forceRef)
         {
             Thread.sleep(500)
         }
@@ -53,11 +51,11 @@ class AlbumViewModel(application: Application,albumId: Int, forcerefresh:Boolean
         _isNetworkErrorShown.value = true
     }
 
-    class Factory(val app: Application,val albumId:Int,val forcerefresh: Boolean) : ViewModelProvider.Factory {
+    class Factory(val app: Application, val albumId:Int, private val forceRefresh: Boolean) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(AlbumViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return AlbumViewModel(app,albumId,forcerefresh) as T
+                return AlbumViewModel(app, albumId, forceRefresh) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }

@@ -7,8 +7,12 @@ import com.example.vinyls.broker.VolleyBroker
 import com.example.vinyls.models.Musician
 import org.json.JSONArray
 
+
 class MusicianNwServiceAdapter constructor(context:Context) {
-    var volleyBroker:VolleyBroker = VolleyBroker(context.applicationContext)
+
+    private var volleyBroker:VolleyBroker = VolleyBroker(context.applicationContext)
+    private val requestQueue:RequestQueue = volleyBroker.instance
+
     companion object{
         var instance: MusicianNwServiceAdapter? = null
         fun getInstance(context: Context) =
@@ -19,7 +23,6 @@ class MusicianNwServiceAdapter constructor(context:Context) {
             }
     }
 
-    private val requestQueue:RequestQueue = volleyBroker.instance
     fun getMusicians(onComplete:(resp:List<Musician>)->Unit, onError: (error: VolleyError)->Unit){
         requestQueue.add(volleyBroker.getRequest("musicians",
             { response ->
@@ -43,6 +46,7 @@ class MusicianNwServiceAdapter constructor(context:Context) {
             },
             {
                 onError(it)
-            }))
+            })
+        )
     }
 }

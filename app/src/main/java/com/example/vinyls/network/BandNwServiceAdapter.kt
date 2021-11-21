@@ -6,9 +6,13 @@ import com.android.volley.VolleyError
 import com.example.vinyls.broker.VolleyBroker
 import com.example.vinyls.models.Band
 import org.json.JSONArray
+import org.json.JSONObject
 
 class BandNwServiceAdapter constructor(context:Context) {
-    var volleyBroker:VolleyBroker = VolleyBroker(context.applicationContext)
+
+    private var volleyBroker:VolleyBroker = VolleyBroker(context.applicationContext)
+    private val requestQueue:RequestQueue = volleyBroker.instance
+
     companion object{
         var instance: BandNwServiceAdapter? = null
         fun getInstance(context: Context) =
@@ -19,14 +23,15 @@ class BandNwServiceAdapter constructor(context:Context) {
             }
     }
 
-    private val requestQueue:RequestQueue = volleyBroker.instance
     fun getBands(onComplete:(resp:List<Band>)->Unit, onError: (error: VolleyError)->Unit){
         requestQueue.add(volleyBroker.getRequest("bands",
             { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Band>()
+                var item: JSONObject?
+
                 for (i in 0 until resp.length()) {
-                    val item = resp.getJSONObject(i)
+                    item = resp.getJSONObject(i)
                     list.add(
                         i, Band(
                             bandId = item.getInt("id"),

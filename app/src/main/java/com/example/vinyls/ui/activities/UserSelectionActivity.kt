@@ -6,7 +6,9 @@ import android.os.Bundle
 import androidx.appcompat.widget.AppCompatButton
 import com.example.vinyls.R
 
+
 class UserSelectionActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val actionBar = requireNotNull(supportActionBar)
@@ -29,5 +31,4 @@ class UserSelectionActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
 }

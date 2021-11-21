@@ -7,7 +7,9 @@ import com.example.vinyls.models.Musician
 import com.example.vinyls.network.BandNwServiceAdapter
 import com.example.vinyls.network.MusicianNwServiceAdapter
 
+
 class ArtistRepository(val application: Application) {
+
     fun refreshBandsData(callback:(List<Band>)->Unit, onError:(VolleyError)->Unit)
     {
         BandNwServiceAdapter.getInstance(application).getBands(
@@ -17,6 +19,7 @@ class ArtistRepository(val application: Application) {
             onError
         )
     }
+
     fun refreshMusiciansData(callback:(List<Musician>)->Unit, onError:(VolleyError)->Unit)
     {
         MusicianNwServiceAdapter.getInstance(application).getMusicians(

@@ -1,16 +1,13 @@
 package com.example.vinyls.viewmodels
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.*
-import com.example.vinyls.models.Album
 import com.example.vinyls.models.Collector
-import com.example.vinyls.network.AlbumNwServiceAdapter
-import com.example.vinyls.repositories.AlbumRepository
 import com.example.vinyls.repositories.CollectorRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+
 
 class CollectorsViewModel(application: Application) :  AndroidViewModel(application) {
 
@@ -21,12 +18,12 @@ class CollectorsViewModel(application: Application) :  AndroidViewModel(applicat
     val collectors: LiveData<List<Collector>>
         get() = _collectors
 
-    private var _eventNetworkError = MutableLiveData<Boolean>(false)
+    private var _eventNetworkError = MutableLiveData(false)
 
     val eventNetworkError: LiveData<Boolean>
         get() = _eventNetworkError
 
-    private var _isNetworkErrorShown = MutableLiveData<Boolean>(false)
+    private var _isNetworkErrorShown = MutableLiveData(false)
 
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
@@ -39,7 +36,7 @@ class CollectorsViewModel(application: Application) :  AndroidViewModel(applicat
         try {
             viewModelScope.launch (Dispatchers.Default){
                 withContext(Dispatchers.IO){
-                    var data = collectorsRepository.refreshCollectorsData(false)
+                    val data = collectorsRepository.refreshCollectorsData(false)
                     _collectors.postValue(data)
                 }
                 _eventNetworkError.postValue(false)
@@ -59,7 +56,7 @@ class CollectorsViewModel(application: Application) :  AndroidViewModel(applicat
         try {
             viewModelScope.launch (Dispatchers.Default){
                 withContext(Dispatchers.IO){
-                    var data = collectorsRepository.refreshCollectorsData(true)
+                    val data = collectorsRepository.refreshCollectorsData(true)
                     _collectors.postValue(data)
                 }
                 _eventNetworkError.postValue(false)

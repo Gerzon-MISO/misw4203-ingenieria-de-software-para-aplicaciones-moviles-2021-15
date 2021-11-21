@@ -3,7 +3,9 @@ package com.example.vinyls.network
 import android.content.Context
 import com.example.vinyls.models.Album
 
+
 class AlbumCacheManager(context:Context) {
+
     companion object{
         var instance: AlbumCacheManager? = null
         fun getInstance(context: Context) =

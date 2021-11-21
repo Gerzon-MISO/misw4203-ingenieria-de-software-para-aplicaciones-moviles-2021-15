@@ -1,4 +1,5 @@
 package com.example.vinyls.broker
+
 import android.content.Context
 import com.android.volley.Request
 import com.android.volley.RequestQueue
@@ -8,9 +9,11 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONObject
 
+
 class VolleyBroker constructor(context: Context) {
-    public val instance: RequestQueue = Volley.newRequestQueue(context.applicationContext)
-    val BASE_URL = "https://vynilsmovil.herokuapp.com/"
+
+    private val BASE_URL = "https://vynilsmovil.herokuapp.com/"
+    val instance: RequestQueue = Volley.newRequestQueue(context.applicationContext)
 
     fun getRequest(
         path: String,

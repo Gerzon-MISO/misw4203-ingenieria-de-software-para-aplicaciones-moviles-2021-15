@@ -1,21 +1,18 @@
 package com.example.vinyls.adapter
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinyls.R
 import com.example.vinyls.databinding.BandItemBinding
 import com.example.vinyls.models.Band
-import com.example.vinyls.ui.fragments.ArtistsFragment
 import com.squareup.picasso.Picasso
 
 
 class BandsAdapter : RecyclerView.Adapter<BandsAdapter.BandsViewHolder>() {
 
-    var navController: NavController? = null
     var bands :List<Band> = emptyList()
         set(value) {
             field = value
@@ -31,7 +28,7 @@ class BandsAdapter : RecyclerView.Adapter<BandsAdapter.BandsViewHolder>() {
         return BandsViewHolder(withDataBinding)
     }
 
-    override fun onBindViewHolder(holder: BandsAdapter.BandsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BandsViewHolder, position: Int) {
         holder.viewDataBinding.also {
             it.bands = bands[position]
             it.artistNameTextView.text = it.bands?.name
@@ -41,12 +38,6 @@ class BandsAdapter : RecyclerView.Adapter<BandsAdapter.BandsViewHolder>() {
                 .error(R.drawable.noimg)
                 .into(it.artistImageView)
         }
-
-
-
-
-
-
     }
 
     override fun getItemCount(): Int {
@@ -59,6 +50,5 @@ class BandsAdapter : RecyclerView.Adapter<BandsAdapter.BandsViewHolder>() {
             @LayoutRes
             val LAYOUT = R.layout.band_item
         }
-
     }
 }

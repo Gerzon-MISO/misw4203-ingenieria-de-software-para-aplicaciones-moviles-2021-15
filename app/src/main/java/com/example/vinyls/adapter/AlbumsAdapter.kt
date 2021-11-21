@@ -1,9 +1,9 @@
 package com.example.vinyls.adapter
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinyls.R
@@ -15,7 +15,6 @@ import com.squareup.picasso.Picasso
 
 class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumsViewHolder>(){
 
-    var navController: NavController? = null
     var albums :List<Album> = emptyList()
         set(value) {
             field = value

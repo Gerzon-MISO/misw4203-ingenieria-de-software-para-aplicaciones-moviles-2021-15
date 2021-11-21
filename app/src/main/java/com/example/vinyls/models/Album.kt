@@ -4,6 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.parcel.RawValue
 import org.json.JSONArray
+import org.json.JSONObject
 
 
 @Parcelize
@@ -22,30 +23,19 @@ data class Album (
 {
     fun getArtistsString():String
     {
-        var performer_string = ""
+        var performerString = ""
+        var performer: JSONObject?
+
         for (i in 0 until performers.length())
         {
-            var performer = performers.getJSONObject(i)
-            if (performer_string=="")
-            {
-                performer_string = performer_string + "${performer["name"]}"
+            performer = performers.getJSONObject(i)
+            performerString = if (performerString == "") {
+                performerString + "${performer["name"]}"
+            } else {
+                performerString + " | ${performer["name"]}"
             }
-            else
-            {
-                performer_string = performer_string + " | ${performer["name"]}"
-            }
-
         }
-        return performer_string
-    }
-
-    fun getArtistCover(): String
-    {
-        if (performers.length() > 0)
-        {
-            return "${performers.getJSONObject(0)["image"]}"
-        }
-        return ""
+        return performerString
     }
 }
 
