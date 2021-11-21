@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragments.ArtistsFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textViewBands"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Bandas"
+                android:textColor="@color/secondary_text"
+                android:textSize="18sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:ignore="MissingConstraints" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/bandsRv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewBands"
+                tools:listitem="@layout/band_item"
+                />
+            <TextView
+                android:id="@+id/textViewMusicians"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Músicos"
+                android:textColor="@color/secondary_text"
+                android:textSize="18sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/bandsRv"
+                tools:layout_editor_absoluteX="0dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/musiciansRv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewMusicians"
+                tools:listitem="@layout/band_item"
+                />
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="20dp"
+                android:background="@drawable/button_styled"
+                android:radius="10dp"
+                android:stateListAnimator="@null"
+                android:text="@string/agregar_artista"
+                android:textColor="#424242"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/musiciansRv" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</FrameLayout>

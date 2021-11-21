@@ -1,38 +1,50 @@
 package com.example.vinyls.ui.fragments
 
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.vinyls.R
 import com.example.vinyls.adapter.AlbumsAdapter
 import com.example.vinyls.databinding.FragmentAlbumsBinding
-import com.example.vinyls.models.Album
 import com.example.vinyls.viewmodels.AlbumsViewModel
 
+
 class AlbumsFragment : Fragment() {
+
     private var _binding: FragmentAlbumsBinding? = null
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
     private var viewModelAdapter: AlbumsAdapter?= null
     private lateinit var viewModel: AlbumsViewModel
+    private var mSwipeRefreshLayout: SwipeRefreshLayout? = null
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentAlbumsBinding.inflate(inflater, container, false)
         val view = binding.root
         viewModelAdapter = AlbumsAdapter()
+        mSwipeRefreshLayout = view.findViewById(R.id.swipe_refresh_albums)
+        mSwipeRefreshLayout?.setOnRefreshListener {
+            viewModel.forceRefreshDataFromNetwork()
+            val handler = Handler()
+            handler.postDelayed({
+                if (mSwipeRefreshLayout!!.isRefreshing) {
+                    mSwipeRefreshLayout?.isRefreshing = false
+                }
+            }, 1000)
+        }
         return view
     }
 
@@ -49,12 +61,12 @@ class AlbumsFragment : Fragment() {
         }
         activity.actionBar?.title = getString(R.string.title_albums)
         viewModel = ViewModelProvider(this, AlbumsViewModel.Factory(activity.application)).get(AlbumsViewModel::class.java)
-        viewModel.albums.observe(viewLifecycleOwner, Observer<List<Album>> {
+        viewModel.albums.observe(viewLifecycleOwner, {
             it.apply {
                 viewModelAdapter!!.albums = this
             }
         })
-        viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
+        viewModel.eventNetworkError.observe(viewLifecycleOwner, { isNetworkError ->
             if (isNetworkError) onNetworkError()
         })
     }
@@ -65,5 +77,4 @@ class AlbumsFragment : Fragment() {
             viewModel.onNetworkErrorShown()
         }
     }
-
 }

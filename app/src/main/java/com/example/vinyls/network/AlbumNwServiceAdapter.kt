@@ -8,8 +8,10 @@ import com.example.vinyls.models.Album
 import org.json.JSONArray
 import org.json.JSONObject
 
+
 class AlbumNwServiceAdapter constructor(context:Context) {
-    var volleyBroker:VolleyBroker = VolleyBroker(context.applicationContext)
+
+    private var volleyBroker:VolleyBroker = VolleyBroker(context.applicationContext)
     companion object{
         var instance: AlbumNwServiceAdapter? = null
         fun getInstance(context: Context) =
@@ -26,8 +28,9 @@ class AlbumNwServiceAdapter constructor(context:Context) {
             { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Album>()
+                var item: JSONObject? = null
                 for (i in 0 until resp.length()) {
-                    val item = resp.getJSONObject(i)
+                    item = resp.getJSONObject(i)
                     list.add(i, Album(
                         albumId = item.getInt("id"),
                         name = item.getString("name"),

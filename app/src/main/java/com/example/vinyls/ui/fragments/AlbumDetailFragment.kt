@@ -1,38 +1,25 @@
 package com.example.vinyls.ui.fragments
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import android.widget.Toolbar
-import androidx.activity.addCallback
-import androidx.lifecycle.Observer
+import androidx.appcompat.widget.AppCompatButton
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.test.core.app.ApplicationProvider
-import com.example.vinyls.R
 import com.example.vinyls.adapter.AlbumAdapter
 import com.example.vinyls.adapter.AlbumArtistsAdapter
 import com.example.vinyls.adapter.AlbumTracksAdapter
 import com.example.vinyls.databinding.FragmentAlbumDetailBinding
 import com.example.vinyls.models.Album
 import com.example.vinyls.viewmodels.AlbumViewModel
-import androidx.test.core.app.ApplicationProvider.getApplicationContext
-import androidx.test.core.app.ApplicationProvider.getApplicationContext
-
-
-
-
-
-
+import com.example.vinyls.R
 
 
 class AlbumDetailFragment : Fragment() {
@@ -43,6 +30,7 @@ class AlbumDetailFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var artistsRecyclerView: RecyclerView
     private lateinit var trackRecyclerView: RecyclerView
+    private lateinit var album: Album
 
     private lateinit var viewModel: AlbumViewModel
     private var viewModelAdapter: AlbumAdapter? = null
@@ -50,11 +38,10 @@ class AlbumDetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAlbumDetailBinding.inflate(inflater, container, false)
         val view = binding.root
         viewModelAdapter = AlbumAdapter()
-
         return view
     }
 
@@ -70,8 +57,12 @@ class AlbumDetailFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = viewModelAdapter
 
+        val createTrackButton : AppCompatButton = view.findViewById(R.id.agregar_cancion_but)
+        createTrackButton.setOnClickListener {
+            val action = AlbumDetailFragmentDirections.actionAlbumDetailFragmentToCreateTrackFragment(album)
+            view.findNavController().navigate(action)
+        }
     }
-
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -79,22 +70,18 @@ class AlbumDetailFragment : Fragment() {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
-        println(activity.actionBar?.title)
 
-        viewModel = ViewModelProvider(this,AlbumViewModel.Factory(activity.application,args.albumId)).get(AlbumViewModel::class.java)
-        viewModel.album.observe(viewLifecycleOwner,Observer<Album>
-        {
+        viewModel = ViewModelProvider(this,AlbumViewModel.Factory(activity.application,args.albumId,args.refresh)).get(AlbumViewModel::class.java)
+        viewModel.album.observe(viewLifecycleOwner, {
+            album = it
             viewModelAdapter?.album = it
             artistsRecyclerView.adapter = AlbumArtistsAdapter(it.performers)
             trackRecyclerView.adapter = AlbumTracksAdapter(it.tracks)
-
         })
-        viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
+        viewModel.eventNetworkError.observe(viewLifecycleOwner, { isNetworkError ->
             if (isNetworkError) onNetworkError()
         })
-
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

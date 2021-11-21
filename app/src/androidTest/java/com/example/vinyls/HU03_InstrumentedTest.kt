@@ -19,7 +19,7 @@ import org.junit.runner.RunWith
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 @RunWith(AndroidJUnit4::class)
-class HU01Test {
+class HU03Test {
 
     @Rule
     @JvmField
@@ -27,31 +27,39 @@ class HU01Test {
         ActivityScenarioRule(UserSelectionActivity::class.java)
 
     @Test
-    fun testHU01() {
+    fun testHU03() {
 
-        // Inicia con usuario "Visitante"
+        // Inicia con usuario "Usuario"
         val visitorsBtn =
-            onView(allOf(withId(R.id.button3), withText("VISITANTE"),
+            onView(allOf(withId(R.id.button4), withText("USUARIO"),
                 isDisplayed()
             ))
         visitorsBtn.check(matches(isDisplayed()))
         visitorsBtn.perform(click())
         Thread.sleep(5000)
 
-        //Revisa que exista el boton de album y lo pulsa
-        val albumsBtn =
-            onView(allOf(withId(R.id.navigation_albums),
+        //Seleccionar Artistas
+        val artistMenu =
+            onView(allOf(
+                withContentDescription(R.string.title_artists),
                 isDisplayed()
             ))
-        albumsBtn.check(matches(isDisplayed()))
-        albumsBtn.perform(click())
-        Thread.sleep(5000)
+        artistMenu.check(matches(isDisplayed()))
+        artistMenu.perform(click())
+        Thread.sleep(2000)
 
-        //Revisa que este listado el album Poeta del pueblo
-        val albumText =
-            onView(allOf(withId(R.id.textView), withText("Poeta del pueblo"),
+        //Revisa que este listado la banda Queen
+        val bandText =
+            onView(allOf(withId(R.id.artistNameTextView), withText("Queen"),
                 isDisplayed()
             ))
-       albumText.check(matches(isDisplayed()))
+        bandText.check(matches(isDisplayed()))
+
+        //Revisa que este listado el musico Ruben Blades
+        val musicianText =
+            onView(allOf(withId(R.id.artistNameTextView), withText("Rubén Blades Bellido de Luna"),
+                isDisplayed()
+            ))
+        musicianText.check(matches(isDisplayed()))
     }
 }

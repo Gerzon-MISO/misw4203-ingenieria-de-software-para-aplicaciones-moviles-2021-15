@@ -1,6 +1,5 @@
 package com.example.vinyls.ui.activities
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController

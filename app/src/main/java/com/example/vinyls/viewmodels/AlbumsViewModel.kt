@@ -3,8 +3,8 @@ package com.example.vinyls.viewmodels
 import android.app.Application
 import androidx.lifecycle.*
 import com.example.vinyls.models.Album
-import com.example.vinyls.network.AlbumNwServiceAdapter
 import com.example.vinyls.repositories.AlbumRepository
+
 
 class AlbumsViewModel(application: Application) :  AndroidViewModel(application) {
 
@@ -15,28 +15,42 @@ class AlbumsViewModel(application: Application) :  AndroidViewModel(application)
     val albums: LiveData<List<Album>>
         get() = _albums
 
-    private var _eventNetworkError = MutableLiveData<Boolean>(false)
+    private var _eventNetworkError = MutableLiveData(false)
 
     val eventNetworkError: LiveData<Boolean>
         get() = _eventNetworkError
 
-    private var _isNetworkErrorShown = MutableLiveData<Boolean>(false)
+    private var _isNetworkErrorShown = MutableLiveData(false)
 
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
     init {
-        refreshDataFromNetwork()
+        refreshData()
     }
 
-    private fun refreshDataFromNetwork() {
+    private fun refreshData() {
         albumsRepository.refreshAlbumsData({
             _albums.postValue(it)
             _eventNetworkError.value = false
             _isNetworkErrorShown.value = false
         },{
             _eventNetworkError.value = true
-        })
+        },
+            false
+        )
+    }
+
+    fun forceRefreshDataFromNetwork() {
+        albumsRepository.refreshAlbumsData({
+            _albums.postValue(it)
+            _eventNetworkError.value = false
+            _isNetworkErrorShown.value = false
+        },{
+            _eventNetworkError.value = true
+        },
+            true
+        )
     }
 
     fun onNetworkErrorShown() {
