@@ -13,11 +13,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/bandRecyclerView"
+                android:id="@+id/musicianRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/band_detail_item" />
+                tools:listitem="@layout/musician_detail_item" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </FrameLayout>
