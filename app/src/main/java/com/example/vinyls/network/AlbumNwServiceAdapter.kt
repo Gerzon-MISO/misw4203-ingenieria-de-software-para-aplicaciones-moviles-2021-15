@@ -7,6 +7,9 @@ import com.example.vinyls.broker.VolleyBroker
 import com.example.vinyls.models.Album
 import org.json.JSONArray
 import org.json.JSONObject
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 
 
 class AlbumNwServiceAdapter constructor(context:Context) {
@@ -49,6 +52,19 @@ class AlbumNwServiceAdapter constructor(context:Context) {
             {
                 onError(it)
             }))
+    }
+
+    suspend fun postAlbum(body: JSONObject) = suspendCoroutine<Boolean>  {
+            cont -> requestQueue.add(volleyBroker.postRequest(
+        "albums",
+        body,
+        {
+            cont.resume(true)
+        },
+        {
+            cont.resumeWithException(it)
+        }
+    ))
     }
 
     fun getAlbum(onComplete:(resp:Album)->Unit, onError: (error: VolleyError)->Unit,albumId:Int){

@@ -29,6 +29,7 @@
                     tools:listitem="@layout/album_item" />
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/agregarAlbumButt"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="20dp"
