@@ -13,4 +13,5 @@
     <color name="secondaryLightColor">#629749</color>
     <color name="primaryTextColor">#ffffff</color>
     <color name="secondaryTextColor">#7D7D7D</color>
+    <color name="my_spinner_text_color">#FFFFFF</color>
 </resources>

@@ -4,14 +4,24 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.example.vinyls.models.Album
 import com.example.vinyls.repositories.AlbumRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.lang.Exception
 
 
-class AlbumsViewModel(application: Application) :  AndroidViewModel(application) {
+class AlbumsViewModel(application: Application, forceRefresh:Boolean) :  AndroidViewModel(application) {
+
+    private val forceRefresh = forceRefresh
 
     private val albumsRepository = AlbumRepository(application)
 
     private val _albums = MutableLiveData<List<Album>>()
 
+    private val _isAdded = MutableLiveData<Boolean>()
+
+    val isAdded: LiveData<Boolean>
+        get() = _isAdded
     val albums: LiveData<List<Album>>
         get() = _albums
 
@@ -26,10 +36,14 @@ class AlbumsViewModel(application: Application) :  AndroidViewModel(application)
         get() = _isNetworkErrorShown
 
     init {
-        refreshData()
+            refreshData()
     }
 
     private fun refreshData() {
+        if(forceRefresh)
+        {
+            Thread.sleep(500)
+        }
         albumsRepository.refreshAlbumsData({
             _albums.postValue(it)
             _eventNetworkError.value = false
@@ -37,8 +51,25 @@ class AlbumsViewModel(application: Application) :  AndroidViewModel(application)
         },{
             _eventNetworkError.value = true
         },
-            false
+            forceRefresh
         )
+    }
+
+    fun pushData(album:Album) {
+        try {
+            viewModelScope.launch(Dispatchers.Default) {
+                withContext(Dispatchers.IO) {
+                    var response = albumsRepository.pushData(album)
+                    println("Rpsonse is")
+                    println(response)
+                }
+                _eventNetworkError.postValue(false)
+                _isNetworkErrorShown.postValue(false)
+            }
+        }
+        catch (e: Exception) {
+            _eventNetworkError.value = true
+        }
     }
 
     fun forceRefreshDataFromNetwork() {
@@ -57,11 +88,11 @@ class AlbumsViewModel(application: Application) :  AndroidViewModel(application)
         _isNetworkErrorShown.value = true
     }
 
-    class Factory(val app: Application) : ViewModelProvider.Factory {
+    class Factory(val app: Application,val forceRefresh: Boolean) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(AlbumsViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return AlbumsViewModel(app) as T
+                return AlbumsViewModel(app,forceRefresh) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }

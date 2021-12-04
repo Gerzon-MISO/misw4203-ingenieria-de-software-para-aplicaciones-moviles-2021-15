@@ -11,8 +11,15 @@
         tools:layout="@layout/fragment_albums" >
 
         <action
-            android:id="@+id/action_albumsFragment_to_albumDetailFragment"
+            android:id="@+id/action_albumsFragment_to_Album_detail_Fragment"
             app:destination="@+id/navigation_album_detail"/>
+        <action
+            android:id="@+id/action_navigation_albums_to_createAlbumFragment"
+            app:destination="@id/createAlbumFragment" />
+
+        <argument
+            android:name="forceRefresh"
+            app:argType="boolean"/>
 
     </fragment>
 
@@ -40,6 +47,44 @@
     </fragment>
 
     <fragment
+        android:id="@+id/navigation_band_detail"
+        android:name="com.example.vinyls.ui.fragments.BandDetailFragment"
+        android:label="Artistas"
+        tools:layout="@layout/fragment_band_detail">
+
+        <argument
+            android:name="bandId"
+            app:argType="integer" />
+        <argument
+            android:name="refresh"
+            app:argType="boolean" />
+
+        <action
+            android:id="@+id/action_navigation_band_detail_to_navigation_artists"
+            app:destination="@id/navigation_artists" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_musician_detail"
+        android:name="com.example.vinyls.ui.fragments.MusicianDetailFragment"
+        android:label="Artistas"
+        tools:layout="@layout/fragment_musician_detail">
+
+        <argument
+            android:name="musicianId"
+            app:argType="integer" />
+        <argument
+            android:name="refresh"
+            app:argType="boolean" />
+
+        <action
+            android:id="@+id/action_navigation_musician_detail_to_navigation_artists"
+            app:destination="@id/navigation_artists" />
+
+    </fragment>
+
+    <fragment
         android:id="@+id/navigation_collectors"
         android:name="com.example.vinyls.ui.fragments.CollectorsFragment"
         android:label="Coleccionistas"
@@ -61,7 +106,14 @@
         android:id="@+id/navigation_artists"
         android:name="com.example.vinyls.ui.fragments.ArtistsFragment"
         android:label="Artistas"
-        tools:layout="@layout/fragment_artists" />
+        tools:layout="@layout/fragment_artists" >
+        <action
+            android:id="@+id/action_navigation_artists_to_navigation_band_detail"
+            app:destination="@id/navigation_band_detail" />
+        <action
+            android:id="@+id/action_navigation_artists_to_navigation_musician_detail"
+            app:destination="@id/navigation_musician_detail" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_create_track"
@@ -76,6 +128,19 @@
         <argument
             android:name="album"
             app:argType="com.example.vinyls.models.Album"/>
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/createAlbumFragment"
+        android:name="com.example.vinyls.ui.fragments.CreateAlbumFragment"
+        android:label="Crear Album"
+        tools:layout="@layout/fragment_create_album" >
+        <action
+            android:id="@+id/action_createAlbumFragment_to_navigation_albums"
+            app:destination="@id/navigation_albums" />
+
 
     </fragment>
 

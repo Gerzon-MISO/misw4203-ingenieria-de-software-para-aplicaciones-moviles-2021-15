@@ -51,4 +51,26 @@ class BandNwServiceAdapter constructor(context:Context) {
                 onError(it)
             }))
     }
+
+    fun getBand(onComplete: (resp: Band) -> Unit, onError: (error: VolleyError) -> Unit, bandId:Int){
+        requestQueue.add(volleyBroker.getRequest("bands/${bandId}",
+            { response ->
+                val item = JSONObject(response)
+                val targetBand = Band(
+                    bandId = item.getInt("id"),
+                    name = item.getString("name"),
+                    image = item.getString("image"),
+                    description = item.getString("description"),
+                    creationDate = item.getString("creationDate"),
+                    albums = item.getJSONArray("albums"),
+                    musicians = item.getJSONArray("musicians"),
+                    performerPrizes = item.getJSONArray("performerPrizes")
+                )
+                onComplete(targetBand)
+            },
+            {
+                onError(it)
+            }
+        ))
+    }
 }
