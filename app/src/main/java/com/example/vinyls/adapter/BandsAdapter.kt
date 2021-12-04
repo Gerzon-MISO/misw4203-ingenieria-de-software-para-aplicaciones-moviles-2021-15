@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinyls.R
 import com.example.vinyls.databinding.BandItemBinding
 import com.example.vinyls.models.Band
+import com.example.vinyls.ui.fragments.ArtistsFragmentDirections
 import com.squareup.picasso.Picasso
 
 
@@ -37,6 +39,11 @@ class BandsAdapter : RecyclerView.Adapter<BandsAdapter.BandsViewHolder>() {
                 .placeholder(R.drawable.noimg)
                 .error(R.drawable.noimg)
                 .into(it.artistImageView)
+        }
+
+        holder.viewDataBinding.root.setOnClickListener {
+            val action = ArtistsFragmentDirections.actionNavigationArtistsToNavigationBandDetail(bands[position].bandId, false)
+            holder.viewDataBinding.root.findNavController().navigate(action)
         }
     }
 

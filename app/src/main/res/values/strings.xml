@@ -17,6 +17,8 @@
     <string name="album_title">Album title</string>
     <string name="track_name_field">Nombre de la canción</string>
     <string name="text_save_button">Guardar</string>
+    <string name="description">Descripción</string>
+
 
 <!--    Agregar Album Strings-->
     <string name="nombre_album_agregar">Nombre del album</string>
