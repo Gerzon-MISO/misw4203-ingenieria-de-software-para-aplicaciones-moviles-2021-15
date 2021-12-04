@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragments.CollectorAlbumItemFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="30sp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/albumImageView"
+                android:layout_width="140dp"
+                android:layout_height="133dp"
+                android:contentDescription="@string/desc_album_cover"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/gradient_album_cover" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="30sp"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/albumTitleConstraint"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    >
+
+                    <TextView
+                        android:id="@+id/titleAlbum"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text=""
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:layout_marginBottom="10sp"
+                        />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/albumTitleConstraint">
+
+                    <TextView
+                        android:id="@+id/artistSubtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_light"
+                        android:text="@string/artista_prefix"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/artistName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_light"
+                        android:text="@string/hello_blank_fragment"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/artistSubtitle"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:maxLines="1"
+                        />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+    </LinearLayout>
+
+</FrameLayout>

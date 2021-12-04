@@ -3,7 +3,9 @@ package com.example.vinyls.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinyls.R
 import com.example.vinyls.databinding.CollectorItemBinding
@@ -40,7 +42,9 @@ class CollectorsAdapter : RecyclerView.Adapter<CollectorsAdapter.CollectorsViewH
         }
 
         holder.viewDataBinding.root.setOnClickListener {
-            CollectorsFragmentDirections.actionCollectorsFragmentToCollectorDetailFragment()
+            val action = CollectorsFragmentDirections.actionCollectorsFragmentToCollectorDetailFragment()
+            val bundle = bundleOf("Collector" to collectors[position])
+            holder.viewDataBinding.root.findNavController().navigate(action.actionId,bundle)
         }
     }
 

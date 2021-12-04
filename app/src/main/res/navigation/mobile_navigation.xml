@@ -50,6 +50,14 @@
     </fragment>
 
     <fragment
+        android:id="@+id/navigation_collector_detail"
+        android:name="com.example.vinyls.ui.fragments.CollectorDetailFragment"
+        android:label="@string/title_collectors"
+        tools:layout="@layout/fragment_collector_detail">
+
+    </fragment>
+
+    <fragment
         android:id="@+id/navigation_artists"
         android:name="com.example.vinyls.ui.fragments.ArtistsFragment"
         android:label="Artistas"
