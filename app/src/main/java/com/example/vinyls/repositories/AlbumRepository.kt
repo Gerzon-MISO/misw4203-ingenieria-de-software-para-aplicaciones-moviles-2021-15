@@ -3,9 +3,13 @@ package com.example.vinyls.repositories
 import android.app.Application
 import com.android.volley.VolleyError
 import com.example.vinyls.models.Album
+import com.example.vinyls.models.Track
 import com.example.vinyls.network.AlbumCacheManager
 import com.example.vinyls.network.AlbumNwServiceAdapter
 import com.example.vinyls.network.AlbumsCacheManager
+import com.example.vinyls.network.NetworkServiceAdapter
+import com.google.gson.Gson
+import org.json.JSONObject
 
 
 class AlbumRepository(val application: Application) {
@@ -28,6 +32,12 @@ class AlbumRepository(val application: Application) {
         {
             callback(potentialResp)
         }
+    }
+
+    suspend fun pushData(album: Album): Boolean {
+        val jsonString = Gson().toJson(album)
+        val request = JSONObject(jsonString)
+        return AlbumNwServiceAdapter.getInstance(application.applicationContext).postAlbum(request)
     }
 
     fun refreshAlbumData(callback:(Album)->Unit, onError:(VolleyError)->Unit,albumId:Int, forcerefresh:Boolean)

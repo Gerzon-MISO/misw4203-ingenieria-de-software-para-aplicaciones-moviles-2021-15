@@ -8,13 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.vinyls.R
 import com.example.vinyls.adapter.AlbumsAdapter
 import com.example.vinyls.databinding.FragmentAlbumsBinding
+import com.example.vinyls.models.Album
 import com.example.vinyls.viewmodels.AlbumsViewModel
+import kotlinx.android.synthetic.main.fragment_albums.view.*
+import java.lang.Exception
 
 
 class AlbumsFragment : Fragment() {
@@ -45,6 +50,11 @@ class AlbumsFragment : Fragment() {
                 }
             }, 1000)
         }
+        view.agregarAlbumButt.setOnClickListener {
+            val navCreateAlbum = AlbumsFragmentDirections.actionNavigationAlbumsToCreateAlbumFragment()
+            view.findNavController().navigate(navCreateAlbum)
+        }
+
         return view
     }
 
@@ -59,8 +69,22 @@ class AlbumsFragment : Fragment() {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
+
+        var forceRefresh = false
+        try {
+            val args: AlbumsFragmentArgs by navArgs()
+
+            if (args.forceRefresh != null && args.forceRefresh)
+            {
+                forceRefresh = true
+            }
+        }
+        catch (e:Exception)
+        {
+            forceRefresh = false
+        }
         activity.actionBar?.title = getString(R.string.title_albums)
-        viewModel = ViewModelProvider(this, AlbumsViewModel.Factory(activity.application)).get(AlbumsViewModel::class.java)
+        viewModel = ViewModelProvider(this, AlbumsViewModel.Factory(activity.application,forceRefresh)).get(AlbumsViewModel::class.java)
         viewModel.albums.observe(viewLifecycleOwner, {
             it.apply {
                 viewModelAdapter!!.albums = this
