@@ -12,7 +12,7 @@ import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 
-class AlbumNwServiceAdapter constructor(context:Context) {
+class AlbumNwServiceAdapter constructor(context: Context) {
 
     private var volleyBroker:VolleyBroker = VolleyBroker(context.applicationContext)
     companion object{
@@ -31,7 +31,7 @@ class AlbumNwServiceAdapter constructor(context:Context) {
             { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Album>()
-                var item: JSONObject? = null
+                var item: JSONObject?
                 for (i in 0 until resp.length()) {
                     item = resp.getJSONObject(i)
                     list.add(i, Album(

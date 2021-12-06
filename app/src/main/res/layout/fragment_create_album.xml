@@ -169,7 +169,8 @@
                 android:clickable="true"
                 android:maxLines="1"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:autofillHints="" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

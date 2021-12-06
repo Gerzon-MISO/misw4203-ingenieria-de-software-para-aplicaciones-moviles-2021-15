@@ -25,8 +25,6 @@
     <string name="nombre_album_agregar">Nombre del album</string>
     <string name="url_cover_album_agregar">URL de imagen de album</string>
     <string name="desc_album_agregar">Descripción del Album</string>
-    <string name="genero_album_agregar">Genero del album</string>
-    <string name="sello_album_agregar">Sello discografico del album</string>
     <string name="fecha_album_agregar">Fecha del album</string>
 
 

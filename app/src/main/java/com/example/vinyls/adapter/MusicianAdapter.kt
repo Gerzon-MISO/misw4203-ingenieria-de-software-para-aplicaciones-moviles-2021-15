@@ -1,13 +1,12 @@
 package com.example.vinyls.adapter
+
 import android.graphics.PointF
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinyls.R
-import com.example.vinyls.databinding.AlbumDetailItemBinding
 import com.example.vinyls.databinding.MusicianDetailItemBinding
 import com.example.vinyls.models.Musician
 import com.squareup.picasso.Picasso
@@ -15,7 +14,6 @@ import jp.wasabeef.picasso.transformations.gpu.VignetteFilterTransformation
 
 class MusicianAdapter:RecyclerView.Adapter<MusicianAdapter.MusicianViewHolder>() {
 
-    var navController: NavController? = null
     var musician :Musician? = null
         set(value) {
             field = value

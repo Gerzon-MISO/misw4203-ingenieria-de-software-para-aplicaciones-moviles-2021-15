@@ -28,7 +28,7 @@ data class Album (
         var performer: JSONObject?
         for (i in 0 until performers!!.length())
         {
-            performer = performers!!.getJSONObject(i)
+            performer = performers.getJSONObject(i)
             performerString = if (performerString == "") {
                 performerString + "${performer["name"]}"
             } else {

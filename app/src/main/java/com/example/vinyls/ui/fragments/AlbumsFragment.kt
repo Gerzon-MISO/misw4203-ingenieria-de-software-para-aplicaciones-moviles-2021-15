@@ -16,7 +16,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.vinyls.R
 import com.example.vinyls.adapter.AlbumsAdapter
 import com.example.vinyls.databinding.FragmentAlbumsBinding
-import com.example.vinyls.models.Album
 import com.example.vinyls.viewmodels.AlbumsViewModel
 import kotlinx.android.synthetic.main.fragment_albums.view.*
 import java.lang.Exception
@@ -74,7 +73,7 @@ class AlbumsFragment : Fragment() {
         try {
             val args: AlbumsFragmentArgs by navArgs()
 
-            if (args.forceRefresh != null && args.forceRefresh)
+            if (args.forceRefresh)
             {
                 forceRefresh = true
             }

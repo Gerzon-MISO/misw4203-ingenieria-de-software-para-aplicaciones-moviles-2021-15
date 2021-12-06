@@ -29,8 +29,10 @@ class MusicianNwServiceAdapter constructor(context:Context) {
             { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Musician>()
+                var item: JSONObject?
+
                 for (i in 0 until resp.length()) {
-                    val item = resp.getJSONObject(i)
+                    item = resp.getJSONObject(i)
                     list.add(
                         i, Musician(
                             musicianId = item.getInt("id"),

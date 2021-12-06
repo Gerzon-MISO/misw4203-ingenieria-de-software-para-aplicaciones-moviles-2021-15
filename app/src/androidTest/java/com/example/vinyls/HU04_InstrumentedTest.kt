@@ -17,7 +17,6 @@ import org.hamcrest.Matcher
 import org.hamcrest.Matchers
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.TypeSafeMatcher
-import org.hamcrest.core.IsInstanceOf
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -80,6 +79,7 @@ class HU04Test {
                 ViewActions.click()
             )
         )
+        Thread.sleep(3000)
 
         // Check artist name.
         onView(

@@ -53,25 +53,4 @@ class CollectorNwServiceAdapter constructor(context:Context) {
             )
         )
     }
-
-    suspend fun getCollector(collectorId:Int) = suspendCoroutine<Collector>{ cont->
-        requestQueue.add(volleyBroker.getRequest("collectors/${collectorId}",
-            { response ->
-                val item = JSONObject(response)
-                val targetAlbum = Collector(
-                    collectorId = item.getInt("id"),
-                    name = item.getString("name"),
-                    telephone = item.getString("telephone"),
-                    email = item.getString("email"),
-                    comments = item.getJSONArray("comments"),
-                    favoritePerformers = item.getJSONArray("favoritePerformers"),
-                    collectorAlbums = item.getJSONArray("collectorAlbums"),
-                )
-                cont.resume(targetAlbum)
-            },
-            {
-                cont.resumeWithException(it)
-            }
-        ))
-    }
 }

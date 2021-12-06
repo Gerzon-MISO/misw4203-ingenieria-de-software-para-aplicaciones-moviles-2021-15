@@ -8,7 +8,7 @@ import com.example.vinyls.models.Band
 import org.json.JSONArray
 import org.json.JSONObject
 
-class BandNwServiceAdapter constructor(context:Context) {
+class BandNwServiceAdapter constructor(context: Context) {
 
     private var volleyBroker:VolleyBroker = VolleyBroker(context.applicationContext)
     private val requestQueue:RequestQueue = volleyBroker.instance
