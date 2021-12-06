@@ -12,10 +12,12 @@
         android:id="@+id/swipe_refresh_albums"
         >
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/headerConstraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
