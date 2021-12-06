@@ -165,11 +165,12 @@
                 android:hint="@string/fecha_album_agregar"
                 android:inputType="date"
                 android:maxLength="50"
-                android:focusable="true"
+                android:focusable="false"
                 android:clickable="true"
                 android:maxLines="1"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:autofillHints="" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

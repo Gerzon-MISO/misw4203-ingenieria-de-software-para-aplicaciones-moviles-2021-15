@@ -79,6 +79,7 @@ class HU04Test {
                 ViewActions.click()
             )
         )
+        Thread.sleep(3000)
 
         // Check artist name.
         onView(
