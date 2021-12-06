@@ -1,15 +1,10 @@
 package com.example.vinyls.ui.fragments
 
-import android.widget.DatePicker
 
 import android.app.DatePickerDialog
-import android.app.DatePickerDialog.OnDateSetListener
 import android.app.Dialog
-
 import android.os.Bundle
-import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
-import com.example.vinyls.ui.activities.MainActivity
 import java.util.*
 
 

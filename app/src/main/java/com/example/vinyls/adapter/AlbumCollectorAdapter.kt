@@ -1,4 +1,5 @@
-import android.graphics.PointF
+package com.example.vinyls.adapter
+
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,10 +13,8 @@ import android.os.Bundle
 import android.widget.ImageView
 import com.android.volley.VolleyError
 import com.example.vinyls.models.Album
-import com.example.vinyls.models.AlbumCollector
 import com.example.vinyls.network.AlbumNwServiceAdapter
 import com.squareup.picasso.Picasso
-import jp.wasabeef.picasso.transformations.gpu.VignetteFilterTransformation
 import org.json.JSONObject
 
 
@@ -54,13 +53,12 @@ class AlbumCollectorAdapter(private val dataSet: JSONArray?) :
             val bundle = Bundle()
             bundle.putInt("AlbumId", current.get("id") as Int)
             fragmentAlbum.arguments = bundle
-            var album: Album? = null
+
             val albumGet: (Album)-> Unit = {
-                album = it
                 viewHolder.titleAlbum.text = it.name
                 viewHolder.artistName.text = it.getArtistsString()
                 Picasso.get()
-                    .load(it?.cover)
+                    .load(it.cover)
                     .placeholder(R.drawable.noimg)
                     .error(R.drawable.noimg)
                     .into(viewHolder.imageView)
@@ -68,8 +66,8 @@ class AlbumCollectorAdapter(private val dataSet: JSONArray?) :
             val onError: (VolleyError) -> Unit = {
                 Log.d("error","Volley Error")
             }
-            val test = albumNetwork.getAlbum(albumGet,onError, current.get("id") as Int)
-            Log.d("test", album.toString())
+            albumNetwork.getAlbum(albumGet,onError, current.get("id") as Int)
+
             viewHolder.titleAlbum.text = ""
             viewHolder.artistName.text = ""
         }

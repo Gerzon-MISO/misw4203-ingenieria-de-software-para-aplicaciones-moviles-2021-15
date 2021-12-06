@@ -1,7 +1,6 @@
 package com.example.vinyls.ui.fragments
 
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,29 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.vinyls.R
 import com.example.vinyls.adapter.AlbumAdapter
-import com.example.vinyls.adapter.AlbumsAdapter
-import com.example.vinyls.adapter.CollectorsAdapter
 import com.example.vinyls.databinding.FragmentCollectorsBinding
 import com.example.vinyls.viewmodels.AlbumViewModel
-import com.example.vinyls.viewmodels.AlbumsViewModel
-import com.example.vinyls.viewmodels.CollectorsViewModel
 import kotlin.properties.Delegates
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CollectorItemFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CollectorAlbumItemFragment : Fragment() {
 
     private var _binding: FragmentCollectorsBinding? = null
@@ -48,7 +30,7 @@ class CollectorAlbumItemFragment : Fragment() {
         _binding = FragmentCollectorsBinding.inflate(inflater, container, false)
         val view = binding.root
         viewModelAdapter = AlbumAdapter()
-        albumId = arguments?.getString("AlbumId")?.toInt() ?: 0;
+        albumId = arguments?.getString("AlbumId")?.toInt() ?: 0
         Log.d("test","hola")
         return view
     }

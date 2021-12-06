@@ -3,10 +3,8 @@ package com.example.vinyls
 import android.view.View
 import android.view.ViewGroup
 import androidx.test.espresso.Espresso
-import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions
-import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
@@ -14,7 +12,6 @@ import androidx.test.rule.ActivityTestRule
 import com.example.vinyls.ui.activities.UserSelectionActivity
 import org.hamcrest.Description
 import org.hamcrest.Matcher
-import org.hamcrest.Matchers
 import org.hamcrest.Matchers.*
 import org.hamcrest.TypeSafeMatcher
 import org.junit.Rule
@@ -110,19 +107,19 @@ class HU07Test {
         // Ingress url cover
         Espresso.onView(
             allOf(
-                ViewMatchers.withId(R.id.coverEditText),
-                ViewMatchers.isDisplayed()
+                withId(R.id.coverEditText),
+                isDisplayed()
             )
         ).perform(
-            ViewActions.replaceText("https://www.google.com/url?sa=i&url=https%3A%2F%2Ftheconversation.com%2Fweezers-cover-album-is-the-rock-band-honoring-or-exploiting-the-originals-110559&psig=AOvVaw15Wflksckh6qYQyCOzhUKY&ust=1638764747242000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCNi5wcjoy_QCFQAAAAAdAAAAABAD"),
-            ViewActions.closeSoftKeyboard()
+            replaceText("https://www.google.com/url?sa=i&url=https%3A%2F%2Ftheconversation.com%2Fweezers-cover-album-is-the-rock-band-honoring-or-exploiting-the-originals-110559&psig=AOvVaw15Wflksckh6qYQyCOzhUKY&ust=1638764747242000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCNi5wcjoy_QCFQAAAAAdAAAAABAD"),
+            closeSoftKeyboard()
         )
 
         // Ingress description album.
         Espresso.onView(
             allOf(
-                ViewMatchers.withId(R.id.descEditText),
-                ViewMatchers.isDisplayed()
+                withId(R.id.descEditText),
+                isDisplayed()
             )
         ).perform(
             replaceText("This is a Test"),
@@ -133,18 +130,18 @@ class HU07Test {
         val genreRandom = (0..3).random()
         Espresso.onView(
             allOf(
-                ViewMatchers.withId(R.id.spinner1),
+                withId(R.id.spinner1),
                 childAtPosition(
                     allOf(
-                        ViewMatchers.withId(R.id.genreTextField),
+                        withId(R.id.genreTextField),
                         childAtPosition(
-                            ViewMatchers.withId(R.id.mainConstraintLayout),
+                            withId(R.id.mainConstraintLayout),
                             4
                         )
                     ),
                     1
                 ),
-                ViewMatchers.isDisplayed()
+                isDisplayed()
             )
         ).perform(click())
 
@@ -157,12 +154,12 @@ class HU07Test {
         val labelRandom = (0..4).random()
         Espresso.onView(
             allOf(
-                ViewMatchers.withId(R.id.spinner2),
+                withId(R.id.spinner2),
                 childAtPosition(
                     allOf(
-                        ViewMatchers.withId(R.id.labelTextField),
+                        withId(R.id.labelTextField),
                         childAtPosition(
-                            ViewMatchers.withId(R.id.mainConstraintLayout),
+                            withId(R.id.mainConstraintLayout),
                             5
                         )
                     ),
@@ -178,24 +175,25 @@ class HU07Test {
         // Select date
         Espresso.onView(
             allOf(
-                ViewMatchers.withId(R.id.dateEditText),
+                withId(R.id.dateEditText),
                 childAtPosition(
                     childAtPosition(
-                        ViewMatchers.withId(R.id.dateTextField),
+                        withId(R.id.dateTextField),
                         0
                     ),
                     1
                 ),
-                ViewMatchers.isDisplayed()
+                isDisplayed()
             )
         ).perform(click())
 
         val materialButton = Espresso.onView(
             allOf(
-                ViewMatchers.withId(android.R.id.button1), ViewMatchers.withText("OK"),
+                withId(android.R.id.button1),
+                withText("OK"),
                 childAtPosition(
                     childAtPosition(
-                        ViewMatchers.withClassName(`is`("android.widget.ScrollView")),
+                        withClassName(`is`("android.widget.ScrollView")),
                         0
                     ),
                     3
@@ -207,18 +205,19 @@ class HU07Test {
         // CLick in save album button
         Espresso.onView(
             allOf(
-                ViewMatchers.withId(R.id.albumSaveButton), ViewMatchers.withText("Guardar"),
+                withId(R.id.albumSaveButton),
+                withText("Guardar"),
                 childAtPosition(
                     allOf(
-                        ViewMatchers.withId(R.id.mainConstraintLayout),
+                        withId(R.id.mainConstraintLayout),
                         childAtPosition(
-                            ViewMatchers.withClassName(`is`("android.widget.FrameLayout")),
+                            withClassName(`is`("android.widget.FrameLayout")),
                             0
                         )
                     ),
                     7
                 ),
-                ViewMatchers.isDisplayed()
+                isDisplayed()
             )
         ).perform(click())
         Thread.sleep(3000)
@@ -241,15 +240,7 @@ class HU07Test {
                 )
             )
         ).perform(click())
-    /*
-        Espresso.onView(
-            withId(R.id.headerConstraintLayout)
-        ).perform(repeatedlyUntil(swipeUp(),
-            hasDescendant(withText("Agregar Album")),
-            10))
-        Thread.sleep(3000)
 
-     */
         Espresso.onView(
             withId(R.id.nestedScrollView)
         ).perform(swipeUp())
@@ -320,25 +311,25 @@ class HU07Test {
 
         // Check text error name EditText
         Espresso.onView(
-            Matchers.allOf(
-                ViewMatchers.withId(R.id.albumNameEditText),
-                ViewMatchers.isDisplayed()
+            allOf(
+                withId(R.id.albumNameEditText),
+                isDisplayed()
             )
-        ).check(ViewAssertions.matches(ViewMatchers.hasErrorText("El nombre es requerido!")))
+        ).check(ViewAssertions.matches(hasErrorText("El nombre es requerido!")))
 
         Espresso.onView(
-            Matchers.allOf(
-                ViewMatchers.withId(R.id.coverEditText),
-                ViewMatchers.isDisplayed()
+            allOf(
+                withId(R.id.coverEditText),
+                isDisplayed()
             )
-        ).check(ViewAssertions.matches(ViewMatchers.hasErrorText("El url de la portada es requerida!")))
+        ).check(ViewAssertions.matches(hasErrorText("El url de la portada es requerida!")))
 
         Espresso.onView(
-            Matchers.allOf(
-                ViewMatchers.withId(R.id.descEditText),
-                ViewMatchers.isDisplayed()
+            allOf(
+                withId(R.id.descEditText),
+                isDisplayed()
             )
-        ).check(ViewAssertions.matches(ViewMatchers.hasErrorText("La fecha es requerida!")))
+        ).check(ViewAssertions.matches(hasErrorText("La fecha es requerida!")))
         Thread.sleep(3000)
     }
 

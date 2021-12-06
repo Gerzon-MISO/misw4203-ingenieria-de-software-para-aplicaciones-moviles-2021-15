@@ -18,10 +18,6 @@ class AlbumsViewModel(application: Application, forceRefresh:Boolean) :  Android
 
     private val _albums = MutableLiveData<List<Album>>()
 
-    private val _isAdded = MutableLiveData<Boolean>()
-
-    val isAdded: LiveData<Boolean>
-        get() = _isAdded
     val albums: LiveData<List<Album>>
         get() = _albums
 
@@ -59,7 +55,7 @@ class AlbumsViewModel(application: Application, forceRefresh:Boolean) :  Android
         try {
             viewModelScope.launch(Dispatchers.Default) {
                 withContext(Dispatchers.IO) {
-                    var response = albumsRepository.pushData(album)
+                    val response = albumsRepository.pushData(album)
                     println("Rpsonse is")
                     println(response)
                 }

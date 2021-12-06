@@ -6,19 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.widget.AppCompatButton
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinyls.adapter.BandAdapter
-
-import com.example.vinyls.databinding.FragmentAlbumDetailBinding
 import com.example.vinyls.models.Band
 import com.example.vinyls.viewmodels.BandViewModel
-import com.example.vinyls.R
 import com.example.vinyls.databinding.FragmentBandDetailBinding
 
 

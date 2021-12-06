@@ -1,8 +1,5 @@
 package com.example.vinyls.ui.fragments
 
-import android.app.Activity
-import android.app.DatePickerDialog
-import android.graphics.PointF
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
@@ -12,17 +9,10 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.navArgs
 import com.example.vinyls.R
 import com.example.vinyls.models.Album
-import com.example.vinyls.models.Track
 import com.example.vinyls.viewmodels.AlbumsViewModel
-import com.example.vinyls.viewmodels.TrackViewModel
-import com.squareup.picasso.Picasso
-import jp.wasabeef.picasso.transformations.gpu.VignetteFilterTransformation
 import kotlinx.android.synthetic.main.fragment_create_album.*
-import kotlinx.android.synthetic.main.fragment_create_track.*
-import org.w3c.dom.Text
 
 
 class CreateAlbumFragment : Fragment() {
@@ -76,14 +66,14 @@ class CreateAlbumFragment : Fragment() {
     }
     private fun setOnClickListener() {
         albumSaveButton?.setOnClickListener {
-            var name = albumNameEditText.text.toString()
-            var cover = coverEditText.text.toString()
-            var description = descEditText.text.toString()
-            var genreTV:TextView = spinner1.selectedView as TextView
-            var labelTV:TextView = spinner2.selectedView as TextView
-            var genre = genreTV.text.toString()
-            var recordLabel = labelTV.text.toString()
-            var releaseDate = dateEditText.text.toString()
+            val name = albumNameEditText.text.toString()
+            val cover = coverEditText.text.toString()
+            val description = descEditText.text.toString()
+            val genreTV:TextView = spinner1.selectedView as TextView
+            val labelTV:TextView = spinner2.selectedView as TextView
+            val genre = genreTV.text.toString()
+            val recordLabel = labelTV.text.toString()
+            val releaseDate = dateEditText.text.toString()
 
             if (TextUtils.isEmpty(name)) {
                 albumNameEditText.error = "El nombre es requerido!"
@@ -103,9 +93,9 @@ class CreateAlbumFragment : Fragment() {
             if (TextUtils.isEmpty(releaseDate)) {
                 descEditText.error = "La fecha es requerida!"
             }
-            var argsArray:ArrayList<String> = arrayListOf(name,cover,description,genre,recordLabel,releaseDate)
+            val argsArray:ArrayList<String> = arrayListOf(name,cover,description,genre,recordLabel,releaseDate)
             if (this.formIsValid(argsArray)) {
-                var album = Album(
+                val album = Album(
                     name = name,
                     cover = cover,
                     recordLabel = recordLabel,
@@ -125,12 +115,12 @@ class CreateAlbumFragment : Fragment() {
     }
 
     private fun showDatePickerDialog() {
-        val newFragment = DatePickerFragment.newInstance(DatePickerDialog.OnDateSetListener { _, year, month, day ->
+        val newFragment = DatePickerFragment.newInstance { _, year, month, day ->
             // +1 because January is zero
             val selectedDate = day.toString() + " / " + (month + 1) + " / " + year
             dateEditText.setText(selectedDate)
-        })
-        val identifier:String = "datePicker"
+        }
+        val identifier = "datePicker"
         activity?.supportFragmentManager?.let { newFragment.show(it,identifier) }
     }
 
@@ -161,7 +151,4 @@ class CreateAlbumFragment : Fragment() {
             viewModel.onNetworkErrorShown()
         }
     }
-
-
-
 }
