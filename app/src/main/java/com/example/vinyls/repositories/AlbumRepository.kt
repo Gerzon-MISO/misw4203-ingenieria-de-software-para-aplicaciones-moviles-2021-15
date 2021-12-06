@@ -6,15 +6,17 @@ import com.example.vinyls.models.Album
 import com.example.vinyls.network.AlbumCacheManager
 import com.example.vinyls.network.AlbumNwServiceAdapter
 import com.example.vinyls.network.AlbumsCacheManager
+import com.google.gson.Gson
+import org.json.JSONObject
 
 
 class AlbumRepository(val application: Application) {
-    fun refreshAlbumsData(callback:(List<Album>)->Unit, onError:(VolleyError)->Unit,forcerefresh:Boolean)
+    fun refreshAlbumsData(callback:(List<Album>)->Unit, onError:(VolleyError)->Unit, forceRefresh: Boolean)
     {
         val albumsCacheInstance = AlbumsCacheManager.getInstance(application.applicationContext)
         val potentialResp = albumsCacheInstance.getAlbums()
 
-        if (potentialResp.isEmpty() || forcerefresh)
+        if (potentialResp.isEmpty() || forceRefresh)
         {
             AlbumNwServiceAdapter.getInstance(application).getAlbums(
                 {
@@ -28,6 +30,12 @@ class AlbumRepository(val application: Application) {
         {
             callback(potentialResp)
         }
+    }
+
+    suspend fun pushData(album: Album): Boolean {
+        val jsonString = Gson().toJson(album)
+        val request = JSONObject(jsonString)
+        return AlbumNwServiceAdapter.getInstance(application.applicationContext).postAlbum(request)
     }
 
     fun refreshAlbumData(callback:(Album)->Unit, onError:(VolleyError)->Unit,albumId:Int, forcerefresh:Boolean)

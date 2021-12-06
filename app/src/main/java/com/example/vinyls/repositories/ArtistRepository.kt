@@ -20,6 +20,17 @@ class ArtistRepository(val application: Application) {
         )
     }
 
+    fun refreshBandData(callback:(Band)->Unit, onError:(VolleyError)->Unit, bandId:Int)
+    {
+        BandNwServiceAdapter.getInstance(application).getBand(
+            {
+                callback(it)
+            },
+            onError,
+            bandId
+        )
+    }
+
     fun refreshMusiciansData(callback:(List<Musician>)->Unit, onError:(VolleyError)->Unit)
     {
         MusicianNwServiceAdapter.getInstance(application).getMusicians(
@@ -27,6 +38,17 @@ class ArtistRepository(val application: Application) {
                 callback(it)
             },
             onError
+        )
+    }
+
+    fun refreshMusicianData(callback:(Musician)->Unit, onError:(VolleyError)->Unit, musicianId:Int)
+    {
+        MusicianNwServiceAdapter.getInstance(application).getMusician(
+            {
+                callback(it)
+            },
+            onError,
+            musicianId
         )
     }
 }

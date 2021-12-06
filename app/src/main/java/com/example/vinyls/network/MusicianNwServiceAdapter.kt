@@ -6,6 +6,7 @@ import com.android.volley.VolleyError
 import com.example.vinyls.broker.VolleyBroker
 import com.example.vinyls.models.Musician
 import org.json.JSONArray
+import org.json.JSONObject
 
 
 class MusicianNwServiceAdapter constructor(context:Context) {
@@ -28,8 +29,10 @@ class MusicianNwServiceAdapter constructor(context:Context) {
             { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Musician>()
+                var item: JSONObject?
+
                 for (i in 0 until resp.length()) {
-                    val item = resp.getJSONObject(i)
+                    item = resp.getJSONObject(i)
                     list.add(
                         i, Musician(
                             musicianId = item.getInt("id"),
@@ -43,6 +46,27 @@ class MusicianNwServiceAdapter constructor(context:Context) {
                     )
                 }
                 onComplete(list)
+            },
+            {
+                onError(it)
+            })
+        )
+    }
+
+    fun getMusician(onComplete:(resp:Musician)->Unit, onError: (error: VolleyError)->Unit, musicianId:Int){
+        requestQueue.add(volleyBroker.getRequest("musicians/${musicianId}",
+            { response ->
+                val item = JSONObject(response)
+                val targetMusician = Musician(
+                            musicianId = item.getInt("id"),
+                            name = item.getString("name"),
+                            image = item.getString("image"),
+                            description = item.getString("description"),
+                            birthdate = item.getString("birthDate"),
+                            albums = item.getJSONArray("albums"),
+                            performerPrizes = item.getJSONArray("performerPrizes")
+                )
+                onComplete(targetMusician)
             },
             {
                 onError(it)

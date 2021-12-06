@@ -75,8 +75,8 @@ class AlbumDetailFragment : Fragment() {
         viewModel.album.observe(viewLifecycleOwner, {
             album = it
             viewModelAdapter?.album = it
-            artistsRecyclerView.adapter = AlbumArtistsAdapter(it.performers)
-            trackRecyclerView.adapter = AlbumTracksAdapter(it.tracks)
+            artistsRecyclerView.adapter = AlbumArtistsAdapter(it.performers!!)
+            trackRecyclerView.adapter = AlbumTracksAdapter(it.tracks!!)
         })
         viewModel.eventNetworkError.observe(viewLifecycleOwner, { isNetworkError ->
             if (isNetworkError) onNetworkError()

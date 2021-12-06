@@ -12,10 +12,12 @@
         android:id="@+id/swipe_refresh_albums"
         >
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/headerConstraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -29,6 +31,7 @@
                     tools:listitem="@layout/album_item" />
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/agregarAlbumButt"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="20dp"

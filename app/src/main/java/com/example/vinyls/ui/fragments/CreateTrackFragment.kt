@@ -77,7 +77,7 @@ class CreateTrackFragment : Fragment() {
                 val duration = "$durationMinutes:$durationSeconds"
                 val track = Track(0, trackName, duration)
                 sendData(track)
-                val action = CreateTrackFragmentDirections.actionCreateTrackFragmentToAlbumDetailFragment(album.albumId,true)
+                val action = CreateTrackFragmentDirections.actionCreateTrackFragmentToAlbumDetailFragment(album.albumId!!,true)
                 viewAlbum.findNavController().navigate(action)
             }
         }
@@ -93,7 +93,7 @@ class CreateTrackFragment : Fragment() {
     private fun sendData(track: Track) {
         viewModel = ViewModelProvider(
             this,
-            TrackViewModel.Factory(activity!!.application, album.albumId, track)).get(TrackViewModel::class.java)
+            TrackViewModel.Factory(activity!!.application, album.albumId!!, track)).get(TrackViewModel::class.java)
         viewModel.eventNetworkError.observe(viewLifecycleOwner, {
             isNetworkError -> if (isNetworkError) onNetworkError()
         })

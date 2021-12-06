@@ -3,7 +3,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="secondary_text">#757575</color>
-    <color name="translucent_white">#E6FFFFFF</color>
     <color name="gradient_start">#00ffffff</color>
     <color name="gradient_end">#aa000000</color>
     <color name="gradient_center">#00ffffff</color>
@@ -13,4 +12,5 @@
     <color name="secondaryLightColor">#629749</color>
     <color name="primaryTextColor">#ffffff</color>
     <color name="secondaryTextColor">#7D7D7D</color>
+    <color name="my_spinner_text_color">#FFFFFF</color>
 </resources>

@@ -17,4 +17,30 @@
     <string name="album_title">Album title</string>
     <string name="track_name_field">Nombre de la canción</string>
     <string name="text_save_button">Guardar</string>
+    <string name="artista_prefix">Artista \u0020 · \u0020 </string>
+    <string name="description">Descripción</string>
+
+
+<!--    Agregar Album Strings-->
+    <string name="nombre_album_agregar">Nombre del album</string>
+    <string name="url_cover_album_agregar">URL de imagen de album</string>
+    <string name="desc_album_agregar">Descripción del Album</string>
+    <string name="fecha_album_agregar">Fecha del album</string>
+
+
+    <string-array name="genres_array">
+        <item>Classical</item>
+        <item>Salsa</item>
+        <item>Rock</item>
+        <item>Folk</item>
+    </string-array>
+
+    <string-array name="labels_array">
+        <item>Sony Music</item>
+        <item>EMI</item>
+        <item>Discos Fuentes</item>
+        <item>Elektra</item>
+        <item>Fania Records</item>
+    </string-array>
+
 </resources>

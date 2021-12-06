@@ -1,33 +1,28 @@
 package com.example.vinyls.ui.fragments
 
+import com.example.vinyls.adapter.AlbumCollectorAdapter
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.vinyls.R
+import com.example.vinyls.models.Collector
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_collector_detail.*
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [CollectorDetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CollectorDetailFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var collector: Collector? = null
+    private lateinit var textView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
@@ -35,26 +30,19 @@ class CollectorDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        collector = arguments?.getParcelable<Collector>("Collector")!!
         return inflater.inflate(R.layout.fragment_collector_detail, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CollectorDetailFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CollectorDetailFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        textView = view.findViewById(R.id.collectorTitleTextView)
+        textView.text = collector?.name ?: "Undefined"
+        Picasso.get()
+                .load(collector?.email)
+                .placeholder(R.drawable.noimg)
+                .error(R.drawable.noimg)
+                .into(imageView)
+        albumsRv.layoutManager = GridLayoutManager(view.context,1)
+        albumsRv.adapter = AlbumCollectorAdapter(collector?.collectorAlbums)
     }
 }
