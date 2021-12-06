@@ -165,7 +165,7 @@
                 android:hint="@string/fecha_album_agregar"
                 android:inputType="date"
                 android:maxLength="50"
-                android:focusable="false"
+                android:focusable="true"
                 android:clickable="true"
                 android:maxLines="1"
                 android:textColor="@color/white"
